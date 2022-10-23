@@ -7,9 +7,9 @@
 
 .highlight {
 
-  $plaintext: $light_turquoise !default;
-  $string: $light_turquoise !default;
-  $literal: $light_turquoise !default;
+  $plaintext: $cyan !default;
+  $string: $cyan !default;
+  $literal: $cyan !default;
   $keyword: $bouquet !default;
   $error-foreground: $cod-grey !default;
   $error-background: $apple-blossom !default;
@@ -22,7 +22,7 @@
   $regex: $gulf-stream !default;
   $string-escape: $potters-clay !default;
   $deleted: $apple-blossom !default;
-  $header: $light_turquoise !default;
+  $header: $cyan !default;
 
   color: $plaintext;
 
