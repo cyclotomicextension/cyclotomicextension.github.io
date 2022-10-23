@@ -1,6 +1,16 @@
-<img src="C1D0BD98-8799-45F6-B71F-A694B7192F29_1_201_a.jpeg" width="80">
+<style>   
+.wrapingimage  
+{  
+float: left;   
+margin: 30px 12px 3px 4px;   
+border: 2px solid blue;  
+}   
+</style>   
+<div class="wrapingimage">   
+<img src="C1D0BD98-8799-45F6-B71F-A694B7192F29_1_201_a.jpeg" width="200">
+</div>   
 
-Hello, my name is Additi Pandey and I like exploring things that are "merely real". My interests are in Cognitive Neuroscience, Machine Learning, Functional Programming, Number Theory and Etymology. My MSc thesis was titled "Reciprocity Laws" that dealt with the quadratic and the cubic reciprocity laws, and primes of the form $x^2+ny^2$.
+<p>Hello, my name is Additi Pandey and I like exploring things that are "merely real". My interests are in Cognitive Neuroscience, Machine Learning, Functional Programming, Number Theory and Etymology. My MSc thesis was titled "Reciprocity Laws" that dealt with the quadratic and the cubic reciprocity laws, and primes of the form $x^2+ny^2$.<p>
 
 <p>I am pursuing my master's in Pure Mathematics from Imperial College London and I did my bachelor's in Mathematics from Jesus and Mary College, University of Delhi. I also attended a graduate summer school at Tata Institute of Fundamental Research.<p>
 
