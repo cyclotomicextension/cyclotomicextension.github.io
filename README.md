@@ -1,4 +1,4 @@
-<p>Hello, my name is Additi Pandey and I like exploring things that are "merely real". My interests are in Cognitive Neuroscience, Machine Learning, Functional Programming, Number Theory and Etymology. My MSc thesis was titled "Reciprocity Laws" that dealt with the quadratic and the cubic reciprocity laws, and primes of the form ![equation](https://bit.ly/3DonyZn" align="center" border="0" alt="x^2+ny^2" width="72" height="22").<p>
+<p>Hello, my name is Additi Pandey and I like exploring things that are "merely real". My interests are in Cognitive Neuroscience, Machine Learning, Functional Programming, Number Theory and Etymology. My MSc thesis was titled "Reciprocity Laws" that dealt with the quadratic and the cubic reciprocity laws, and primes of the form ![equation](https://bit.ly/3DonyZn").<p>
 
 <p>I am pursuing my master's in Pure Mathematics from Imperial College London and I did my bachelor's in Mathematics from Jesus and Mary College, University of Delhi. I also attended a graduate summer school at Tata Institute of Fundamental Research.<p>
 
