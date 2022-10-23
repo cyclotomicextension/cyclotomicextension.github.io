@@ -4,4 +4,5 @@ show_downloads: true
 google_analytics:
 theme: jekyll-theme-hacker
 github:
+  url: https://github.com/cyclotomicextension
   zip_url: https://github.com/cyclotomicextension/cyclotomicextension.github.io/blob/cd6e1f7e62780f8d3c18f71e4edfb79fb2e57746/AdditiPandeyCV.pdf
