@@ -20,7 +20,14 @@
         <h2>{{ site.description | default: site.github.project_tagline }}</h2>
         <section id="downloads">
           {% if site.show_downloads %}
-            <a href="{{ site.github.zip_url }}" class="btn">Single-Page Resume</a>
+          <div class="dropdown">
+          <button class="dropbtn">Dropdown</button>
+          <div class="dropdown-content">
+              <a href="{{ site.github.zip_url }}" class="dropbtn">Single-Page Resume</a>
+             <a href="#">Link 2</a>
+             <a href="#">Link 3</a>
+          </div>
+          </div>
           {% endif %}
            <a href="{{ site.github.url }}" class="btn btn-github"><span class="icon"></span>GitHub Profile</a>
         </section>
