@@ -8,13 +8,6 @@
     {% include head-custom.html %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-.dropbtn {
-  background-color: #000000;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border-radius: 15px;
-}
 
 .dropdown {
   position: relative;
@@ -41,7 +34,7 @@
 
 .dropdown:hover .dropdown-content {display: block;}
 
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+.dropdown:hover .btn {background-color: #000000;}
 </style>
 {% seo %}
   </head style="color:cyan">
@@ -57,7 +50,7 @@
         <section id="downloads">
           {% if site.show_downloads %}
           <div class="dropdown">
-          <button class="dropbtn">Resume</button>
+          <button class="btn">Resume</button>
           <div class="dropdown-content">
               <a href="{{ site.github.zip_url }}">One-Page Resume</a>
              <a href="{{ site.github.pink_url }}">Two-Page Resume</a>
