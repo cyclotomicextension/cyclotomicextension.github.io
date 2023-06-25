@@ -8,33 +8,7 @@
     {% include head-custom.html %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-/* 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {background-color: #ddd;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .btn {background-color: #000000;}
+/* Styles removed for clarity */
 </style>
 {% seo %}
   </head style="color:cyan">
@@ -47,7 +21,7 @@
           <h1>{{ site.title | default: site.github.repository_name }}</h1>
         </a>
         <h2>{{ site.description | default: site.github.project_tagline }}</h2>
-<!--         <section id="downloads">
+         <section id="downloads">
           {% if site.show_downloads %}
           <div class="dropdown">
           <button class="btn">Resume</button>
@@ -55,12 +29,12 @@
               <a href="{{ site.github.zip_url }}" target="_blank">One-Page Resume</a>
              <a href="{{ site.github.pink_url }}" target="_blank">Two-Page Resume</a>
           </div>
-          </div> -->
-<!--           {% endif %}
+          </div> 
+          {% endif %}
            <a href="{{ site.github.url }}" class="btn btn-github"><span class="icon"></span>GitHub Profile</a>
           <a href="{{ site.linkedin.url }}" class="btn btn-linkedin"><span class="icon"></span>LinkedIn Profile</a>
           <a href="{{ site.linkedin.url }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#linkedin' | relative_url }}"></use></svg> <span class="username">{{ site.linkedin_username| escape }}</span></a>
-        </section> -->
+        </section>
       </div>
     </header>
     
@@ -82,15 +56,15 @@
       </section>
     </div>
     
-<!-- <style type="text/css">
+<style type="text/css">
 .tg {border-collapse:collapse;border-spacing:0;width: 70%; margin-left: auto; margin-right: auto;}
 .tg td{border-color:cyan;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
   overflow:hidden;padding:10px 5px;word-break:normal;}
 .tg th{border-color:cyan;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
   font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
 .tg .tg-0lax{text-align:left;vertical-align:top}
-</style> -->
-<!-- <table class="tg">
+</style>
+<table class="tg">
 <thead>
   <tr>
     <th class="tg-0lax"><b>Cognitive Neuroscience</b></th>
@@ -98,8 +72,8 @@
     <th class="tg-0lax"><b>Computer Science</b></th>
     <th class="tg-0lax"><b>Other Works</b></th>
   </tr>
-</thead> -->
-<!-- <tbody>
+</thead> 
+<tbody>
   <tr>
     <td class="tg-0lax">Discovering the Nervous System</td>
     <td class="tg-0lax"><a href="https://cyclot0micextension.wordpress.com/2020/09/06/instant-insanity-puzzle/">Trapped in an Insanity Puzzle</a></td>
@@ -118,8 +92,8 @@
     <td class="tg-0lax"><a href="https://cyclot0micextension.wordpress.com/2023/01/19/regression-classification-datasets/">Regression-Classification Datasets</a></td>
     <td class="tg-0lax"><a href="https://ficjmc.wordpress.com/2021/02/24/growth-in-corporate-debt-of-usa-and-other-countries-from-2005-to-2020/">Corporate Debt Analysis?</a></td>
   </tr>
-</tbody> -->
-<!-- </table>
+</tbody> 
+</table>
 I recently started a 'Wrapping My Head Around' series for concepts that I initially thought are hard but seem to trivial now:
 <ul>
   <li><a href="https://wordpress.com/post/cyclot0micextension.wordpress.com/514">NumPy Broadcasting</a></li>
@@ -127,14 +101,21 @@ I recently started a 'Wrapping My Head Around' series for concepts that I initia
   <li><a href="https://cyclot0micextension.wordpress.com/2023/02/18/categorical-data-encoders/">Categorical Data Encoders</a></li>
   <li><a href="https://cyclot0micextension.wordpress.com/2023/02/24/wrapping-my-head-around-anomalous-behaviour-of-logical-operators-in-python/">Logical vs Bitwise Operators</a></li>
   <li><a href="https://cyclot0micextension.wordpress.com/2023/03/01/imperative-programming-paradigm/">Imperative Programming Paradigm</a></li>
-</ul> -->
+</ul>
 +++
     I would love to hear from you!
-    <form accept-charset="UTF-8" action="https://usebasin.com/f/123456xabcdef" enctype="multipart/form-data" method="POST">
-      You can enter your email and your feedback in these boxes. 
-      <input type="email" id="email" name="email" required>
-      <textarea rows="4" cols="50" name="comment" required></textarea>
-      <button type="submit">Submit</button>
+    <form action="https://formspree.io/your-form-id" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" required></textarea><br><br>
+
+    <input type="submit" value="Submit">
+  </form>
 </form>
   </body>
 </html>
