@@ -1,51 +1,83 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    {% include head-custom.html %}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-/* Styles removed for clarity */
-</style>
-{% seo %}
-  </head style="color:cyan">
+<html lang="{{ site.lang | default: 'en-US' }}">
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+  {% include head-custom.html %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
 
-  <body>
-    
-    <header>
-      <div class="container">
-        <a id="a-title" href="{{ '/' | relative_url }}">
-          <h1>{{ site.title | default: site.github.repository_name }}</h1>
-        </a>
-        <h2>{{ site.description | default: site.github.project_tagline }}</h2>
-         <section id="downloads">
-          {% if site.show_downloads %}
-          <div class="dropdown">
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown:hover .btn {
+      background-color: #000000;
+    }
+  </style>
+  {% seo %}
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <a id="a-title" href="{{ '/' | relative_url }}">
+        <h1>{{ site.title | default: site.github.repository_name }}</h1>
+      </a>
+      <h2>{{ site.description | default: site.github.project_tagline }}</h2>
+      <section id="downloads">
+        {% if site.show_downloads %}
+        <div class="dropdown">
           <button class="btn">Resume</button>
           <div class="dropdown-content">
-              <a href="{{ site.github.zip_url }}" target="_blank">One-Page Resume</a>
-             <a href="{{ site.github.pink_url }}" target="_blank">Two-Page Resume</a>
+            <a href="{{ site.github.zip_url }}" target="_blank">One-Page Resume</a>
+            <a href="{{ site.github.pink_url }}" target="_blank">Two-Page Resume</a>
           </div>
-          </div> 
-          {% endif %}
-           <a href="{{ site.github.url }}" class="btn btn-github"><span class="icon"></span>GitHub Profile</a>
-          <a href="{{ site.linkedin.url }}" class="btn btn-linkedin"><span class="icon"></span>LinkedIn Profile</a>
-          <a href="{{ site.linkedin.url }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#linkedin' | relative_url }}"></use></svg> <span class="username">{{ site.linkedin_username| escape }}</span></a>
-        </section>
-      </div>
-    </header>
-    
-    <style>   
-      .wrapingimage  
-        {  
-          float: left;   
-          margin: 30px 12px 3px 4px;   
-          border: 2px solid cyan;  
-         }   
-     </style>   
+        </div>
+        {% endif %}
+        <a href="{{ site.github.url }}" class="btn btn-github"><span class="icon"></span>GitHub Profile</a>
+        <a href="{{ site.linkedin.url }}" class="btn btn-linkedin"><span class="icon"></span>LinkedIn Profile</a>
+        <a href="{{ site.linkedin.url }}">
+          <svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#linkedin' | relative_url }}"></use></svg>
+          <span class="username">{{ site.linkedin_username| escape }}</span>
+        </a>
+      </section>
+    </div>
+  </header>
+
+  <style>
+    .wrapingimage {
+      float: left;
+      margin: 30px 12px 3px 4px;
+      border: 2px solid cyan;
+    }
+  </style>  
     <div class="wrapingimage">   
       <img src="additi_linkedin.png" width="200">
     </div>   
