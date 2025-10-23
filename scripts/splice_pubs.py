@@ -1,30 +1,45 @@
 # scripts/splice_pubs.py
 import io, os, re, sys
 
-README = "README.md"
-HTML   = "publications.html"
-START  = "<!-- PUBLICATIONS:START -->"
-END    = "<!-- PUBLICATIONS:END -->"
+HTML_SRC = "publications.html"
+MARK_START = "<!-- PUBLICATIONS:START -->"
+MARK_END   = "<!-- PUBLICATIONS:END -->"
 
-if not os.path.exists(README):
-    sys.exit("ERROR: README.md not found")
-if not os.path.exists(HTML):
-    sys.exit("ERROR: publications.html not found")
+# Prefer index.html (your homepage), then README.md
+CANDIDATES = ["index.html", "README.md"]
 
-readme = io.open(README, "r", encoding="utf-8").read()
-html   = io.open(HTML, "r", encoding="utf-8").read()
+def load(path):
+    return io.open(path, "r", encoding="utf-8").read()
 
-# If Pandoc produced a bare list, add a header so it’s obvious
+def save(path, text):
+    io.open(path, "w", encoding="utf-8").write(text)
+
+if not os.path.exists(HTML_SRC):
+    sys.exit("ERROR: publications.html not found. Did the Pandoc step run?")
+
+html = load(HTML_SRC)
+# Add a header if Pandoc produced only a list
 if "<h2" not in html.lower():
     html = "<h2>Publications</h2>\n" + html
 
-pattern = re.compile(re.escape(START) + r".*?" + re.escape(END), re.S)
-replacement = f"{START}\n{html}\n{END}"
+target = None
+for f in CANDIDATES:
+    if os.path.exists(f):
+        text = load(f)
+        if MARK_START in text and MARK_END in text:
+            target = f
+            break
 
-if pattern.search(readme):
-    out = pattern.sub(replacement, readme)
-else:
-    out = readme.rstrip() + "\n\n" + replacement + "\n"
+if not target:
+    sys.exit(
+        "ERROR: No markers found.\n"
+        "Add these markers either to index.html or README.md:\n"
+        f"{MARK_START}\n(leave empty)\n{MARK_END}\n"
+    )
 
-io.open(README, "w", encoding="utf-8").write(out)
-print("README.md updated.")
+text = load(target)
+pat = re.compile(re.escape(MARK_START) + r".*?" + re.escape(MARK_END), re.S)
+rep = f"{MARK_START}\n{html}\n{MARK_END}"
+out = pat.sub(rep, text)
+save(target, out)
+print(f"Updated {target} with {len(html)} chars of publications.")
