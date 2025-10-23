@@ -6,7 +6,7 @@
   
 <!-- PUBLICATIONS:START -->
 <h2>Publications</h2>
-<p>ocite{*}</p>
+<p></p>
 
 <!-- PUBLICATIONS:END -->
 

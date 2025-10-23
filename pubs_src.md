@@ -1,2 +1,1 @@
-
-ocite{*}
+\nocite{*}
