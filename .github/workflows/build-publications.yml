@@ -6,6 +6,7 @@ on:
       - 'publications.bib'
       - 'README.md'
       - '.github/workflows/build-publications.yml'
+      - 'scripts/splice_pubs.py'
   workflow_dispatch:
 
 permissions:
@@ -34,23 +35,7 @@ jobs:
 
       - name: Splice publications into README between markers
         if: ${{ hashFiles('publications.html') != '' && hashFiles('README.md') != '' }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-import io, re
-readme = io.open("README.md", "r", encoding="utf-8").read()
-html   = io.open("publications.html", "r", encoding="utf-8").read()
-start, end = "<!-- PUBLICATIONS:START -->", "<!-- PUBLICATIONS:END -->"
-# Ensure a visible header
-if "<h2" not in html.lower():
-    html = "<h2>Publications</h2>\n" + html
-pat = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
-rep = start + "\n" + html + "\n" + end
-out = pat.sub(rep, readme) if pat.search(readme) else readme.rstrip() + "\n\n" + rep + "\n"
-io.open("README.md", "w", encoding="utf-8").write(out)
-print("README.md updated.")
-PY
+        run: python3 scripts/splice_pubs.py
 
       - name: Commit changes
         run: |
