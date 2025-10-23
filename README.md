@@ -5,6 +5,8 @@
 <p>This website features my resume (perhaps, an outdated one), links to my blog, and a selection of projects that I have undertaken to explore my diverse interests. If you share any of these interests, I invite you to visit my blog, where I occasionally offer reflections and insights on my academic experiences, as well as provide guidance on the application process for internships. These can be accessed <a href="http://cyclot0micextension.wordpress.com/">here!</a>. Moreover, if you enjoy mathematics and physics-related videos, you can check out my <a href="https://www.youtube.com/@CyclotomicExposition"> YouTube channel</a>.<p> -->
   
 <!-- PUBLICATIONS:START -->
-<p><em>Publications will appear here…</em></p>
+<h2>Publications</h2>
+<p>ocite{*}</p>
+
 <!-- PUBLICATIONS:END -->
 
