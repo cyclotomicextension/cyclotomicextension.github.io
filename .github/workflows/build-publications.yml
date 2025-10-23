@@ -3,9 +3,9 @@ name: Build publications (APA into README)
 on:
   push:
     paths:
-      - publications.bib
-      - README.md
-      - .github/workflows/build-publications.yml
+      - 'publications.bib'
+      - 'README.md'
+      - '.github/workflows/build-publications.yml'
   workflow_dispatch:
 
 permissions:
@@ -16,9 +16,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - uses: r-lib/actions/setup-pandoc@v2
 
       - name: Generate publications.html (APA)
+        if: ${{ hashFiles('publications.bib') != '' }}
         run: |
           printf "\\nocite{*}\n" > pubs_src.md
           pandoc --from=markdown --to=html --citeproc \
@@ -26,29 +32,30 @@ jobs:
                  --bibliography=publications.bib \
                  pubs_src.md -o publications.html
 
-      - name: Splice publications into README (no heredoc)
+      - name: Splice publications into README between markers
+        if: ${{ hashFiles('publications.html') != '' && hashFiles('README.md') != '' }}
         shell: bash
         run: |
           set -euo pipefail
-          cat > splice_pubs.py <<'PY'
-      import pathlib, re, sys
-      readme = pathlib.Path("README.md").read_text(encoding="utf-8")
-      html   = pathlib.Path("publications.html").read_text(encoding="utf-8")
-      start  = "<!-- PUBLICATIONS:START -->"
-      end    = "<!-- PUBLICATIONS:END -->"
-      pat = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
-      rep = f"{start}\n{html}\n{end}"
-      out = pat.sub(rep, readme) if pat.search(readme) else readme.rstrip() + "\n\n" + rep + "\n"
-      pathlib.Path("README.md").write_text(out, encoding="utf-8")
-      print("README.md updated.")
-      PY
-          python3 splice_pubs.py
-
+          python3 - <<'PY'
+import io, re
+readme = io.open("README.md", "r", encoding="utf-8").read()
+html   = io.open("publications.html", "r", encoding="utf-8").read()
+start, end = "<!-- PUBLICATIONS:START -->", "<!-- PUBLICATIONS:END -->"
+# Ensure a visible header
+if "<h2" not in html.lower():
+    html = "<h2>Publications</h2>\n" + html
+pat = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
+rep = start + "\n" + html + "\n" + end
+out = pat.sub(rep, readme) if pat.search(readme) else readme.rstrip() + "\n\n" + rep + "\n"
+io.open("README.md", "w", encoding="utf-8").write(out)
+print("README.md updated.")
+PY
 
       - name: Commit changes
         run: |
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
           git add README.md publications.html pubs_src.md || true
-          git commit -m "Update Publications (APA)" || true
+          git diff --cached --quiet || git commit -m "Update Publications (APA)"
           git push
