@@ -153,6 +153,11 @@
     /* Selection color */
     ::selection{ background: rgba(89,208,255,.28); color: var(--text); }
   </style>
+
+  <style>
+  .badge-row .push-right { margin-left: auto; }
+</style>
+
 </head>
 
 <body>
@@ -194,6 +199,21 @@
               <img alt="Resume (PDF)" src="https://img.shields.io/badge/CV-%20PDF-EA4335?style=flat&logo=adobeacrobatreader&logoColor=white">
             </a>
           {% endif %}
+
+          {# --- CAT badge pinned to the extreme right --- #}
+    {% if site.cats and site.cats.url %}
+      <a class="push-right" href="{{ site.cats.url }}" target="_blank" rel="noopener">
+        <img alt="Cats (off-duty)"
+             src="https://img.shields.io/badge/My%20Cat-Fermi-795548?style=flat">
+      </a>
+    {% else %}
+      <!-- Hardcode if you don't want a config key -->
+      <a class="push-right" href="/cats.html" target="_blank" rel="noopener">
+        <img alt="Cats (off-duty)"
+             src="https://img.shields.io/badge/My%20Cat-Fermi-795548?style=flat">
+      </a>
+    {% endif %}
+
         </div>
 
         <!-- Optional dropdown
