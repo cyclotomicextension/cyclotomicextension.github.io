@@ -32,7 +32,7 @@ jobs:
         run: |
           set -euo pipefail
       
-          # Find your .bib (supports either filename)
+          # Pick your .bib (supports both names)
           BIB=""
           for c in publications.bib publication.bib; do
             if [ -f "$c" ]; then BIB="$c"; break; fi
@@ -44,14 +44,15 @@ jobs:
           echo "Using bibliography: $BIB"
           sed -n '1,40p' "$BIB" || true
       
-          # Write a tiny Markdown source with nocite + a header
-          # (no heredoc => no YAML parse issues)
+          # Create a tiny Markdown source with metadata + a header (safe printf)
           {
-            printf '---\n'
-            printf 'nocite: |\n'
-            printf '  @*\n'
-            printf '---\n\n'
-            printf '# Publications\n'
+            printf '%s\n' '---'
+            printf '%s\n' 'nocite: |'
+            printf '%s\n' '  @*'
+            printf '%s\n' 'reference-section-title: "Publications"'
+            printf '%s\n' '---'
+            printf '%s\n' ''
+            printf '%s\n' '# Publications'
           } > pubs_src.md
       
           # Build APA-formatted HTML
@@ -63,11 +64,12 @@ jobs:
           echo "First 40 lines of publications.html ->"
           head -n 40 publications.html || true
       
-          # Fail if bibliography still didn't render
+          # Fail early if bibliography didn't render
           if ! grep -qi '<div[^>]*id="refs' publications.html; then
             echo "ERROR: No references rendered. Check that $BIB has valid entries."
             exit 2
           fi
+
 
       - name: Splice publications into layout/page
         if: ${{ hashFiles('publications.html') != '' }}
