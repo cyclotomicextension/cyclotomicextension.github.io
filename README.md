@@ -4,7 +4,6 @@
 <!-- 
 <p>This website features my resume (perhaps, an outdated one), links to my blog, and a selection of projects that I have undertaken to explore my diverse interests. If you share any of these interests, I invite you to visit my blog, where I occasionally offer reflections and insights on my academic experiences, as well as provide guidance on the internship application process. These can be accessed <a href="http://cyclot0micextension.wordpress.com/">here!</a>. Moreover, if you enjoy mathematics and physics-related videos, you can check out my <a href="https://www.youtube.com/@CyclotomicExposition"> YouTube channel</a>.<p> -->
   
-<!-- PUBLICATIONS:START -->
 <h2 id="publications">Publications and Preprints</h2>
 
 <ol class="pubs">
@@ -24,6 +23,22 @@
 
 </ol>
 
+<div class="container" style="max-width: 860px; margin-top: 18px;">
+  <h2>Mentorship</h2>
+  <p>
+    Outside my own research, I like to mentor students, especially those interested in numerical analysis, operator learning, and physics-informed neural networks.
+  </p>
 
-<!-- PUBLICATIONS:END -->
+  <ul>
+<li>
+  <strong>Summer Mentor</strong>, CRUNCH Group (Summer 2025) — mentored a high-school student on modeling Black–Scholes equations using PINNs.
+  <span class="badge-row" style="display:inline-flex; gap:8px; margin-left:8px;">
+    <a href="https://sites.google.com/view/blackscholes-bobbywholey/home" target="_blank" rel="noopener">
+      <img alt="Live Site"
+           src="https://img.shields.io/badge/Live%20Site-Open-2ea44f?style=flat&logo=google-chrome&logoColor=white">
+    </a>
+  </span>
+</li>
+  </ul>
+ </div>
 
