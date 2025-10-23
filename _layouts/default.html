@@ -5,86 +5,90 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Theme CSS still loads first so our overrides can win -->
+  <!-- Theme CSS loads first so our overrides win -->
   <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
   {% include head-custom.html %}
   {% seo %}
 
-   <style>
-  :root{
-    --bg: #512223;            
-    --text: #ffffff;
-    --link: #74ffe2;
-    --link-hover: #d8ecff;
-    --accent: #9efeff;
+  <!-- Academic fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
 
-    --dot-gap: 28px;        
-    --dot-size: 2px;           
-    --dot1: rgba(255,255,255,.08);
-    --dot2: rgba(255,255,255,.05);
-  }
+  <style>
+    /* =========================
+       Site Theme (edit tokens)
+       ========================= */
+    :root{
+      --bg: #512223;                 /* deep maroon */
+      --text: #ffffff;               /* main text */
+      --muted: #e7d7d7;              /* labels / secondary */
+      --link: #9bd3ff;               /* link */
+      --link-hover: #d8ecff;         /* link hover */
+      --accent: #59d0ff;             /* borders / highlights */
+      --accent-weak: rgba(89,208,255,.35);
+      --card: rgba(255,255,255,.06); /* panels */
+      --card-strong: rgba(0,0,0,.35);
+      --shadow: 0 8px 24px rgba(0,0,0,.35);
+      --radius: 14px;
 
-  html, body { height: 100%; }
-  body{
-    margin:0;
-    color: var(--text);
-    background-color: var(--bg);
-    /* Dotted fill pattern (two staggered radial grids) */
-    background-image:
-      radial-gradient(circle, var(--dot1) var(--dot-size), transparent calc(var(--dot-size) + 1px)),
-      radial-gradient(circle, var(--dot2) var(--dot-size), transparent calc(var(--dot-size) + 1px));
-    background-size: var(--dot-gap) var(--dot-gap), var(--dot-gap) var(--dot-gap);
-    background-position: 0 0, calc(var(--dot-gap)/2) calc(var(--dot-gap)/2);
-  }
-
-  /* keep links readable on the dark blue */
-  a, a:visited { color: var(--link) !important; }
-  a:hover, a:focus { color: var(--link-hover) !important; text-decoration: underline; }
-
-  /* optional: unify borders/buttons with the accent */
-  .btn { color:#fff !important; border-color: var(--accent) !important; }
-  .wrapingimage { border:2px solid var(--accent); }
-  .tg td, .tg th { border-color: rgba(89,208,255,.35); }
+      /* dotted pattern */
+      --dot-gap: 28px;
+      --dot-size: 2px;
+      --dot1: rgba(255,255,255,.08);
+      --dot2: rgba(255,255,255,.05);
+    }
 
     /* =========
        GLOBALS
        ========= */
     html, body { height: 100%; }
     body{
-      margin: 0;
-      background-color: var(--bg);
-      background-image: var(--bg-img);
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      margin:0;
       color: var(--text);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      background-color: var(--bg);
+      /* Subtle dotted background */
+      background-image:
+        radial-gradient(circle, var(--dot1) var(--dot-size), transparent calc(var(--dot-size) + 1px)),
+        radial-gradient(circle, var(--dot2) var(--dot-size), transparent calc(var(--dot-size) + 1px));
+      background-size: var(--dot-gap) var(--dot-gap), var(--dot-gap) var(--dot-gap);
+      background-position: 0 0, calc(var(--dot-gap)/2) calc(var(--dot-gap)/2);
+      font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
     }
 
-    /* readable links on dark bg */
+    /* Typography */
+    h1, h2, h3, .container h1, .container h2{
+      font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+      font-weight: 600;
+      letter-spacing: .2px;
+      color: var(--text);
+      margin: 0.2rem 0;
+    }
+    h1{ font-size: clamp(28px, 4vw, 40px); }
+    h2{ font-size: clamp(22px, 3vw, 28px); }
+
+    /* Remove any default underline/lines under headings/header */
+    header, .site-header, .page-header,
+    #a-title h1, h1, h2 { border:0 !important; box-shadow:none !important; background-image:none !important; }
+    header::before, header::after, h1::after, h2::after { content:none !important; }
+
+    /* Links */
     a, a:visited { color: var(--link) !important; }
     a:hover, a:focus { color: var(--link-hover) !important; text-decoration: underline; outline: none; }
 
-    /* Headings */
-    .container h1, .container h2, h1, h2, h3 { color: var(--text); }
-
-    /* =============
-       HEADER + BADGES
-       ============= */
-    header { backdrop-filter: blur(4px); }
+    /* Header + badges */
+    header { padding-top: 10px; padding-bottom: 6px; backdrop-filter: blur(3px); }
     #downloads { margin-top: .35rem; }
-    .badge-row{
-      display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:10px;
-    }
-    .badge-row a img{ height:28px; vertical-align:middle; }
+    .badge-row{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:10px; }
+    .badge-row a img{ height:28px; vertical-align:middle; filter: saturate(.95) contrast(1.05); }
     @media (max-width: 600px){ .badge-row a img{ height:24px; } }
 
-    /* =============
-       DROPDOWN (dark)
-       ============= */
-    .dropdown { position: relative; display: inline-block; }
+    /* Dropdown (optional, dark-themed) */
+    .dropdown{ position: relative; display: inline-block; }
     .dropdown .btn{
       display:inline-block; padding:8px 12px; border:1px solid var(--accent);
       color: var(--text) !important; background: transparent; border-radius: var(--radius);
@@ -94,16 +98,12 @@
       min-width: 220px; box-shadow: var(--shadow); z-index: 10; border:1px solid var(--accent-weak);
       border-radius: var(--radius); overflow:hidden;
     }
-    .dropdown-content a{
-      color: var(--text) !important; padding:10px 12px; text-decoration: none; display:block;
-    }
+    .dropdown-content a{ color: var(--text) !important; padding:10px 12px; text-decoration:none; display:block; }
     .dropdown-content a:hover{ background: rgba(255,255,255,.10); }
     .dropdown:hover .dropdown-content{ display:block; }
     .dropdown:hover .btn{ background: var(--card-strong); }
 
-    /* =========
-       PROFILE IMAGE
-       ========= */
+    /* Profile image */
     .wrapingimage{
       float:left; margin: 30px 12px 3px 4px;
       border: 2px solid var(--accent); border-radius: 12px;
@@ -111,43 +111,47 @@
     }
     .wrapingimage img{ display:block; border-radius: 10px; }
 
-    /* ======
-       TABLE
-       ====== */
-    .tg { border-collapse:collapse; border-spacing:0; width: 70%; margin: 24px auto; background: var(--card); border-radius: var(--radius); overflow:hidden; }
+    /* Tables */
+    .tg{
+      border-collapse:collapse; border-spacing:0; width: 70%;
+      margin: 24px auto; background: var(--card); border-radius: var(--radius); overflow:hidden;
+    }
     .tg td, .tg th{
       border-color: var(--accent-weak); border-style:solid; border-width:1px;
-      font-family: Arial, sans-serif; font-size:14px; padding:12px 10px; color: var(--text);
+      font-size:14px; padding:12px 10px; color: var(--text);
     }
     .tg th{
       background: linear-gradient(0deg, rgba(255,255,255,.05), rgba(255,255,255,.1));
       font-weight:600;
     }
-    .tg .tg-0lax{text-align:left; vertical-align:top}
+    .tg .tg-0lax{ text-align:left; vertical-align:top; }
 
-    /* =====
-       FORM
-       ===== */
-    form { background: var(--card); padding: 14px; border:1px solid var(--accent-weak); border-radius: var(--radius); box-shadow: var(--shadow); width: min(720px, 92%); margin: 18px auto; }
-    label { display:block; margin: 10px 0 6px; color: var(--muted) !important; }
+    /* Forms */
+    form{
+      background: var(--card); padding: 14px; border:1px solid var(--accent-weak);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      width: min(720px, 92%); margin: 18px auto;
+    }
+    label{ display:block; margin:10px 0 6px; color: var(--muted) !important; }
     input, textarea, select{
-      width: 100%; padding:10px 12px; border-radius: 10px;
+      width:100%; padding:10px 12px; border-radius:10px;
       border:1px solid var(--accent-weak); background: rgba(0,0,0,.35); color: var(--text);
     }
     input:focus, textarea:focus, select:focus{
-      outline:none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,229,255,.15);
+      outline:none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(89,208,255,.18);
     }
     button[type="submit"]{
-      margin-top:10px; padding:10px 14px; border-radius: 10px; border:1px solid var(--accent);
+      margin-top:10px; padding:10px 14px; border-radius:10px; border:1px solid var(--accent);
       background: transparent; color: var(--text); cursor:pointer;
     }
     button[type="submit"]:hover{ background: var(--card-strong); }
 
-    /* =======
-       FOOTER
-       ======= */
+    /* Footer */
     footer .container a{ color: var(--link); }
     footer .container a:hover{ color: var(--link-hover); }
+
+    /* Selection color */
+    ::selection{ background: rgba(89,208,255,.28); color: var(--text); }
   </style>
 </head>
 
@@ -192,8 +196,7 @@
           {% endif %}
         </div>
 
-        <!-- Optional: keep a compact dropdown, now dark-themed -->
-        <!--
+        <!-- Optional dropdown
         <div class="dropdown" style="margin-top:10px;">
           <button class="btn">More</button>
           <div class="dropdown-content">
@@ -222,10 +225,6 @@
     <!-- PUBLICATIONS:END -->
   </div>
 
-  <!-- Curated posts table -->
-  <style>
-    /* keep table CSS here to avoid Jekyll reordering surprises */
-  </style>
   <table class="tg">
     <thead>
       <tr>
