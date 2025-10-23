@@ -101,22 +101,7 @@
 
     <section id="downloads">
       <div class="badge-row">
-        {% if site.show_downloads and site.github.zip_url %}
-          <!-- Resume (One-page PDF) -->
-          <a href="{{ site.github.zip_url }}" target="_blank" rel="noopener">
-            <img alt="Resume (PDF)"
-                 src="https://img.shields.io/badge/Resume-One--Page%20PDF-EA4335?style=flat&logo=adobeacrobatreader&logoColor=white">
-          </a>
-        {% endif %}
-
-        {% if site.github.pink_url %}
-          <!-- Resume (Two-page PDF) -->
-          <a href="{{ site.github.pink_url }}" target="_blank" rel="noopener">
-            <img alt="Resume (Two-page PDF)"
-                 src="https://img.shields.io/badge/Resume-Two--Page%20PDF-EA4335?style=flat&logo=adobeacrobatreader&logoColor=white">
-          </a>
-        {% endif %}
-
+      
         {% if site.github.url %}
           <!-- GitHub -->
           <a href="{{ site.github.url }}" target="_blank" rel="noopener">
@@ -148,6 +133,23 @@
                  src="https://img.shields.io/badge/Google%20Scholar-Profile-4285F4?style=flat&logo=google-scholar&logoColor=white">
           </a>
         {% endif %}
+
+        {% if site.show_downloads and site.github.zip_url %}
+          <!-- Resume (One-page (Outdated)) -->
+          <a href="{{ site.github.zip_url }}" target="_blank" rel="noopener">
+            <img alt="Resume (PDF)"
+                 src="https://img.shields.io/badge/Resume-One--Page%20PDF-EA4335?style=flat&logo=adobeacrobatreader&logoColor=white">
+          </a>
+        {% endif %}
+
+        {% if site.github.pink_url %}
+          <!-- Resume (Two-page PDF) 
+          <a href="{{ site.github.pink_url }}" target="_blank" rel="noopener">
+            <img alt="Resume (Two-page PDF)"
+                 src="https://img.shields.io/badge/Resume-Two--Page%20PDF-EA4335?style=flat&logo=adobeacrobatreader&logoColor=white">
+          </a>-->
+        {% endif %}
+
       </div>
     </section>
   </div>
