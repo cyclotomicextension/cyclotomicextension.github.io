@@ -1,11 +1,13 @@
-name: Build publications (APA into README or index)
+name: Build publications (APA into page)
 
 on:
   push:
     paths:
       - 'publications.bib'
-      - 'README.md'
+      - '_layouts/default.html'
       - 'default.html'
+      - 'index.html'
+      - 'README.md'
       - 'scripts/splice_pubs.py'
       - '.github/workflows/build-publications.yml'
   workflow_dispatch:
@@ -27,19 +29,22 @@ jobs:
 
       - name: Generate publications.html (APA)
         if: ${{ hashFiles('publications.bib') != '' }}
+        shell: bash
         run: |
-          # Write a tiny source that cites everything (literal \nocite)
-          cat > pubs_src.md <<'MD'
-\nocite{*}
-MD
+          # Write a tiny source that cites everything (literal backslash + newline)
+          printf '\\nocite{*}\n' > pubs_src.md
+
+          # Build APA-formatted HTML with Pandoc
           pandoc --from=markdown --to=html --citeproc \
                  --csl=https://www.zotero.org/styles/apa \
                  --bibliography=publications.bib \
                  pubs_src.md -o publications.html
-          echo "First lines of publications.html:"
-          head -n 20 publications.html || true
 
-      - name: Splice publications into README or index
+          # Debug: confirm contents
+          echo "pubs_src.md ->"; cat -A pubs_src.md
+          echo "First lines of publications.html ->"; head -n 10 publications.html || true
+
+      - name: Splice publications into layout/page
         if: ${{ hashFiles('publications.html') != '' }}
         run: python3 scripts/splice_pubs.py
 
@@ -47,6 +52,6 @@ MD
         run: |
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
-          git add README.md default.html publications.html pubs_src.md || true
+          git add README.md _layouts/default.html default.html index.html publications.html pubs_src.md || true
           git diff --cached --quiet || git commit -m "Update Publications (APA)"
           git push
