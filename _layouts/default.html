@@ -59,42 +59,100 @@
             color: white; /* Change the text color to white or any other contrasting color */
         }
   </style>
+
+  <style>
+  .badge-row{
+    display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:10px;
+  }
+  .badge-row a img{
+    height:28px; vertical-align:middle;
+  }
+  @media (max-width: 600px){
+    .badge-row a img{ height:24px; }
+  }
+</style>
+<style>
+  /* Make all text white */
+  html, body,
+  .container, .container * ,
+  table, th, td, p, li, h1, h2, h3, h4, h5, h6 {
+    color: #ffffff !important;
+  }
+
+  /* Links also white (keep underline on hover for visibility) */
+  a, a:visited { color: #ffffff !important; }
+  a:hover, a:focus { color: #ffffff !important; text-decoration: underline; }
+
+  /* If you still use any .btn elements, make their text/borders white */
+  .btn { color: #ffffff !important; border-color: #ffffff !important; }
+
+  /* Optional: form inputs text to white too */
+  input, textarea, select, label { color: #ffffff !important; }
+</style>
+
 </head>
 
-<>
   <header>
-    <div class="container">
-      <a id="a-title" href="{{ '/' | relative_url }}">
-        <h1>{{ site.title | default: site.github.repository_name }}</h1>
-      </a>
-      <h2>{{ site.description | default: site.github.project_tagline }}</h2>
-      <section id="downloads">
-        {% if site.show_downloads %}
-        <div class="dropdown">
-          <button class="btn">Resume</button>
-          <div class="dropdown-content">
-            <a href="{{ site.github.zip_url }}" target="_blank">One-Page Resume (Outdated)</a>
-           <!--  <a href="{{ site.github.pink_url }}" target="_blank">Two-Page Resume</a> -->
-          </div>
-        </div>
+  <div class="container">
+    <a id="a-title" href="{{ '/' | relative_url }}">
+      <h1>{{ site.title | default: site.github.repository_name }}</h1>
+    </a>
+    <h2>{{ site.description | default: site.github.project_tagline }}</h2>
+
+    <section id="downloads">
+      <div class="badge-row">
+        {% if site.show_downloads and site.github.zip_url %}
+          <!-- Resume (One-page PDF) -->
+          <a href="{{ site.github.zip_url }}" target="_blank" rel="noopener">
+            <img alt="Resume (PDF)"
+                 src="https://img.shields.io/badge/Resume-One--Page%20PDF-EA4335?style=flat&logo=adobeacrobatreader&logoColor=white">
+          </a>
         {% endif %}
-        <a href="{{ site.github.url }}" class="btn btn-github"><span class="icon"></span>GitHub Profile</a>
-        <a href="{{ site.linkedin.url }}" class="btn btn-linkedin"><span class="icon"></span>LinkedIn Profile</a>
-<!--           <svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#linkedin' | relative_url }}"></use></svg>
-          <span class="username">{{ site.linkedin_username| escape }}</span> -->
-       <div class="badge-links">
-  <a href="{{ site.orcid.url }}" target="_blank" rel="noopener">
-    <img alt="ORCID"
-         src="https://img.shields.io/badge/ORCID-Profile-brightgreen?style=flat&logo=orcid&logoColor=white">
-  </a>
-  <a href="{{ site.scholar.url }}" target="_blank" rel="noopener">
-    <img alt="Google Scholar"
-         src="https://img.shields.io/badge/Google%20Scholar-Profile-blue?style=flat&logo=google-scholar&logoColor=white">
-  </a>
-</div>
-      </section>
-    </div>
-  </header>
+
+        {% if site.github.pink_url %}
+          <!-- Resume (Two-page PDF) -->
+          <a href="{{ site.github.pink_url }}" target="_blank" rel="noopener">
+            <img alt="Resume (Two-page PDF)"
+                 src="https://img.shields.io/badge/Resume-Two--Page%20PDF-EA4335?style=flat&logo=adobeacrobatreader&logoColor=white">
+          </a>
+        {% endif %}
+
+        {% if site.github.url %}
+          <!-- GitHub -->
+          <a href="{{ site.github.url }}" target="_blank" rel="noopener">
+            <img alt="GitHub Profile"
+                 src="https://img.shields.io/badge/GitHub-Profile-181717?style=flat&logo=github&logoColor=white">
+          </a>
+        {% endif %}
+
+        {% if site.linkedin and site.linkedin.url %}
+          <!-- LinkedIn -->
+          <a href="{{ site.linkedin.url }}" target="_blank" rel="noopener">
+            <img alt="LinkedIn Profile"
+                 src="https://img.shields.io/badge/LinkedIn-Profile-0A66C2?style=flat&logo=linkedin&logoColor=white">
+          </a>
+        {% endif %}
+
+        {% if site.orcid and site.orcid.url %}
+          <!-- ORCID -->
+          <a href="{{ site.orcid.url }}" target="_blank" rel="noopener">
+            <img alt="ORCID"
+                 src="https://img.shields.io/badge/ORCID-Profile-A6CE39?style=flat&logo=orcid&logoColor=white">
+          </a>
+        {% endif %}
+
+        {% if site.scholar and site.scholar.url %}
+          <!-- Google Scholar -->
+          <a href="{{ site.scholar.url }}" target="_blank" rel="noopener">
+            <img alt="Google Scholar"
+                 src="https://img.shields.io/badge/Google%20Scholar-Profile-4285F4?style=flat&logo=google-scholar&logoColor=white">
+          </a>
+        {% endif %}
+      </div>
+    </section>
+  </div>
+</header>
+
 
   <style>
     .wrapingimage {
