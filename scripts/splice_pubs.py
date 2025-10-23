@@ -5,8 +5,8 @@ HTML_SRC = "publications.html"
 MARK_START = "<!-- PUBLICATIONS:START -->"
 MARK_END   = "<!-- PUBLICATIONS:END -->"
 
-# Prefer index.html (your homepage), then README.md
-CANDIDATES = ["index.html", "README.md"]
+# Prefer default.html (your homepage), then README.md
+CANDIDATES = ["default.html", "README.md"]
 
 def load(path):
     return io.open(path, "r", encoding="utf-8").read()
@@ -33,7 +33,7 @@ for f in CANDIDATES:
 if not target:
     sys.exit(
         "ERROR: No markers found.\n"
-        "Add these markers either to index.html or README.md:\n"
+        "Add these markers either to default.html or README.md:\n"
         f"{MARK_START}\n(leave empty)\n{MARK_END}\n"
     )
 
