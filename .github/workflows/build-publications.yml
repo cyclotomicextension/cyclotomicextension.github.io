@@ -1,0 +1,54 @@
+name: Build publications (APA into README)
+
+on:
+  push:
+    paths:
+      - publications.bib
+      - README.md
+      - .github/workflows/build-publications.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Generate publications.html (APA)
+        run: |
+          printf "\\nocite{*}\n" > pubs_src.md
+          pandoc --from=markdown --to=html --citeproc \
+                 --csl=https://www.zotero.org/styles/apa \
+                 --bibliography=publications.bib \
+                 pubs_src.md -o publications.html
+
+      - name: Splice into README between markers
+        run: |
+          python3 - <<'PY'
+import re, pathlib
+readme_path = pathlib.Path("README.md")
+html_path = pathlib.Path("publications.html")
+readme = readme_path.read_text(encoding="utf-8")
+html = html_path.read_text(encoding="utf-8")
+start = "<!-- PUBLICATIONS:START -->"
+end = "<!-- PUBLICATIONS:END -->"
+pattern = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
+replacement = f"{start}\n{html}\n{end}"
+if pattern.search(readme):
+    readme = pattern.sub(replacement, readme)
+else:
+    readme += "\n\n" + replacement + "\n"
+readme_path.write_text(readme, encoding="utf-8")
+PY
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add README.md publications.html pubs_src.md || true
+          git commit -m "Update Publications (APA)" || true
+          git push
