@@ -35,7 +35,7 @@ jobs:
           echo "Repo root:"
           ls -la
       
-          # Find a .bib (supports both names)
+          # Find a .bib file (supports both names)
           BIB=""
           for c in publications.bib publication.bib; do
             if [ -f "$c" ]; then BIB="$c"; break; fi
@@ -44,24 +44,22 @@ jobs:
             echo "ERROR: No publications.bib or publication.bib found at repo root."
             exit 1
           fi
-      
           echo "Using bibliography: $BIB"
-          echo "First 30 lines of $BIB:"
-          sed -n '1,30p' "$BIB" || true
+          sed -n '1,40p' "$BIB" || true
       
-          # Build APA-formatted HTML with all entries (@*) and a section title
+          # Build APA-formatted HTML, include all entries, add a section title.
+          # No heredoc: feed empty stdin so Pandoc still runs.
           pandoc --to=html --citeproc \
                  --csl=https://www.zotero.org/styles/apa \
                  --bibliography="$BIB" \
                  --metadata nocite='@*' \
                  --metadata reference-section-title="Publications" \
-                 -o publications.html <<'MD'
-      MD
+                 -o publications.html < /dev/null
       
           echo "First 40 lines of publications.html ->"
           head -n 40 publications.html || true
       
-          # Sanity check: fail if result looks empty
+          # Fail early if bibliography didn't render
           if ! grep -qi '<div[^>]*id="refs' publications.html; then
             echo "ERROR: No references rendered. Check that $BIB has valid entries."
             exit 2
