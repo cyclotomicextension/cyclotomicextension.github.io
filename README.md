@@ -8,18 +8,20 @@
 <h2 id="publications">Publications and Preprints</h2>
 
 <ol class="pubs">
-  <li>
-    Shukla, Khemraj, Zongren Zou, Chi Hin Chan, <strong>Additi Pandey</strong>, Zhicheng Wang, and George Em Karniadakis.
-    “NeuroSEM: A hybrid framework for simulating multiphysics problems by coupling PINNs and spectral elements.”
-    <em>Computer Methods in Applied Mechanics and Engineering</em> 433 (2025): 117498.
-  </li>
-
+  
   <li>
     Nath, Kamaljyoti, <strong>Additi Pandey</strong>, Bryan T. Susi, Hessam Babaee, and George Em Karniadakis.
     “AMORE: Adaptive Multi-Output Operator Network for Stiff Chemical Kinetics.”
     <em>arXiv</em> preprint arXiv:2510.12999 (2025).
     <a href="https://arxiv.org/abs/2510.12999" target="_blank" rel="noopener">arXiv:2510.12999</a>
   </li>
+  
+  <li>
+    Shukla, Khemraj, Zongren Zou, Chi Hin Chan, <strong>Additi Pandey</strong>, Zhicheng Wang, and George Em Karniadakis.
+    “NeuroSEM: A hybrid framework for simulating multiphysics problems by coupling PINNs and spectral elements.”
+    <em>Computer Methods in Applied Mechanics and Engineering</em> 433 (2025): 117498.
+  </li>
+
 </ol>
 
 
