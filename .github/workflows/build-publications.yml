@@ -1,12 +1,13 @@
-name: Build publications (APA into README)
+name: Build publications (APA into README or index)
 
 on:
   push:
     paths:
       - 'publications.bib'
       - 'README.md'
-      - '.github/workflows/build-publications.yml'
+      - 'index.html'
       - 'scripts/splice_pubs.py'
+      - '.github/workflows/build-publications.yml'
   workflow_dispatch:
 
 permissions:
@@ -27,20 +28,25 @@ jobs:
       - name: Generate publications.html (APA)
         if: ${{ hashFiles('publications.bib') != '' }}
         run: |
-          printf "\\\\nocite{*}\n" > pubs_src.md
+          # Write a tiny source that cites everything (literal \nocite)
+          cat > pubs_src.md <<'MD'
+\nocite{*}
+MD
           pandoc --from=markdown --to=html --citeproc \
                  --csl=https://www.zotero.org/styles/apa \
                  --bibliography=publications.bib \
                  pubs_src.md -o publications.html
+          echo "First lines of publications.html:"
+          head -n 20 publications.html || true
 
-      - name: Splice publications into README between markers
-        if: ${{ hashFiles('publications.html') != '' && hashFiles('README.md') != '' }}
+      - name: Splice publications into README or index
+        if: ${{ hashFiles('publications.html') != '' }}
         run: python3 scripts/splice_pubs.py
 
       - name: Commit changes
         run: |
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
-          git add README.md publications.html pubs_src.md || true
+          git add README.md index.html publications.html pubs_src.md || true
           git diff --cached --quiet || git commit -m "Update Publications (APA)"
           git push
