@@ -27,7 +27,7 @@ jobs:
       - name: Generate publications.html (APA)
         if: ${{ hashFiles('publications.bib') != '' }}
         run: |
-          printf "\\nocite{*}\n" > pubs_src.md
+          printf "\\\\nocite{*}\n" > pubs_src.md
           pandoc --from=markdown --to=html --citeproc \
                  --csl=https://www.zotero.org/styles/apa \
                  --bibliography=publications.bib \
