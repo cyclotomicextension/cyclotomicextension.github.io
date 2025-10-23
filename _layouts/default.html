@@ -1,189 +1,214 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: 'en-US' }}">
 <head>
-  <meta charset='utf-8'>
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Theme CSS still loads first so our overrides can win -->
   <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
   {% include head-custom.html %}
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-  .badge-links img {
-    height: 22px;           
-    vertical-align: middle;
-    margin-left: 8px;
-  }
-</style>
-  <style>
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f1f1f1;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-    }
-
-    .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-    }
-
-    .dropdown-content a:hover {
-      background-color: #ddd;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    .dropdown:hover .btn {
-      background-color: #000000;
-    }
-  </style>
   {% seo %}
+
   <style>
-        body {
-            background-image: url('https://github.com/cyclotomicextension/cyclotomicextension.github.io/blob/88ce2405810e2c89a72c4b78edeee6933647f76c/DALL%C2%B7E%202023-06-26%2003.14.25%20-%20a%20painting%20with%20a%20window%20showing%20northern%20skies%20and%20a%20telescope%20and%20books%20and%20a%20computer%20in%20owl%20city's%20fireflies%20room.png');
-            background-size: cover;
-        }
-        
-        /* Add this code */
-        body {
-            color: white; /* Change the text color to white or any other contrasting color */
-        }
+    /* =========================
+       THEME TOKENS (edit here)
+       ========================= */
+    :root{
+      --bg: #0b0f18;
+      --bg-img: url('https://raw.githubusercontent.com/cyclotomicextension/cyclotomicextension.github.io/88ce2405810e2c89a72c4b78edeee6933647f76c/DALL%C2%B7E%202023-06-26%2003.14.25%20-%20a%20painting%20with%20a%20window%20showing%20northern%20skies%20and%20a%20telescope%20and%20books%20and%20a%20computer%20in%20owl%20city%27s%20fireflies%20room.png');
+      --text: #ffffff;
+      --muted: #cfd8ff;
+      --link: #9bd3ff;
+      --link-hover: #d1ecff;
+      --accent: #00e5ff;          /* borders & highlights */
+      --accent-weak: rgba(0,229,255,.35);
+      --card: rgba(255,255,255,.06);  /* panels, dropdowns, table cells */
+      --card-strong: rgba(0,0,0,.35);
+      --shadow: 0 8px 24px rgba(0,0,0,.35);
+      --radius: 14px;
+    }
+
+    /* =========
+       GLOBALS
+       ========= */
+    html, body { height: 100%; }
+    body{
+      margin: 0;
+      background-color: var(--bg);
+      background-image: var(--bg-img);
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* readable links on dark bg */
+    a, a:visited { color: var(--link) !important; }
+    a:hover, a:focus { color: var(--link-hover) !important; text-decoration: underline; outline: none; }
+
+    /* Headings */
+    .container h1, .container h2, h1, h2, h3 { color: var(--text); }
+
+    /* =============
+       HEADER + BADGES
+       ============= */
+    header { backdrop-filter: blur(4px); }
+    #downloads { margin-top: .35rem; }
+    .badge-row{
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:10px;
+    }
+    .badge-row a img{ height:28px; vertical-align:middle; }
+    @media (max-width: 600px){ .badge-row a img{ height:24px; } }
+
+    /* =============
+       DROPDOWN (dark)
+       ============= */
+    .dropdown { position: relative; display: inline-block; }
+    .dropdown .btn{
+      display:inline-block; padding:8px 12px; border:1px solid var(--accent);
+      color: var(--text) !important; background: transparent; border-radius: var(--radius);
+    }
+    .dropdown-content{
+      display:none; position:absolute; background-color: var(--card);
+      min-width: 220px; box-shadow: var(--shadow); z-index: 10; border:1px solid var(--accent-weak);
+      border-radius: var(--radius); overflow:hidden;
+    }
+    .dropdown-content a{
+      color: var(--text) !important; padding:10px 12px; text-decoration: none; display:block;
+    }
+    .dropdown-content a:hover{ background: rgba(255,255,255,.10); }
+    .dropdown:hover .dropdown-content{ display:block; }
+    .dropdown:hover .btn{ background: var(--card-strong); }
+
+    /* =========
+       PROFILE IMAGE
+       ========= */
+    .wrapingimage{
+      float:left; margin: 30px 12px 3px 4px;
+      border: 2px solid var(--accent); border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+    .wrapingimage img{ display:block; border-radius: 10px; }
+
+    /* ======
+       TABLE
+       ====== */
+    .tg { border-collapse:collapse; border-spacing:0; width: 70%; margin: 24px auto; background: var(--card); border-radius: var(--radius); overflow:hidden; }
+    .tg td, .tg th{
+      border-color: var(--accent-weak); border-style:solid; border-width:1px;
+      font-family: Arial, sans-serif; font-size:14px; padding:12px 10px; color: var(--text);
+    }
+    .tg th{
+      background: linear-gradient(0deg, rgba(255,255,255,.05), rgba(255,255,255,.1));
+      font-weight:600;
+    }
+    .tg .tg-0lax{text-align:left; vertical-align:top}
+
+    /* =====
+       FORM
+       ===== */
+    form { background: var(--card); padding: 14px; border:1px solid var(--accent-weak); border-radius: var(--radius); box-shadow: var(--shadow); width: min(720px, 92%); margin: 18px auto; }
+    label { display:block; margin: 10px 0 6px; color: var(--muted) !important; }
+    input, textarea, select{
+      width: 100%; padding:10px 12px; border-radius: 10px;
+      border:1px solid var(--accent-weak); background: rgba(0,0,0,.35); color: var(--text);
+    }
+    input:focus, textarea:focus, select:focus{
+      outline:none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,229,255,.15);
+    }
+    button[type="submit"]{
+      margin-top:10px; padding:10px 14px; border-radius: 10px; border:1px solid var(--accent);
+      background: transparent; color: var(--text); cursor:pointer;
+    }
+    button[type="submit"]:hover{ background: var(--card-strong); }
+
+    /* =======
+       FOOTER
+       ======= */
+    footer .container a{ color: var(--link); }
+    footer .container a:hover{ color: var(--link-hover); }
   </style>
-
-  <style>
-  .badge-row{
-    display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:10px;
-  }
-  .badge-row a img{
-    height:28px; vertical-align:middle;
-  }
-  @media (max-width: 600px){
-    .badge-row a img{ height:24px; }
-  }
-</style>
-<style>
-  /* Make all text white */
-  html, body,
-  .container, .container * ,
-  table, th, td, p, li, h1, h2, h3, h4, h5, h6 {
-    color: #ffffff !important;
-  }
-
-  /* Links also white (keep underline on hover for visibility) */
-  a, a:visited { color: #ffffff !important; }
-  a:hover, a:focus { color: #ffffff !important; text-decoration: underline; }
-
-  /* If you still use any .btn elements, make their text/borders white */
-  .btn { color: #ffffff !important; border-color: #ffffff !important; }
-
-  /* Optional: form inputs text to white too */
-  input, textarea, select, label { color: #ffffff !important; }
-</style>
-
 </head>
 
+<body>
   <header>
-  <div class="container">
-    <a id="a-title" href="{{ '/' | relative_url }}">
-      <h1>{{ site.title | default: site.github.repository_name }}</h1>
-    </a>
-    <h2>{{ site.description | default: site.github.project_tagline }}</h2>
+    <div class="container">
+      <a id="a-title" href="{{ '/' | relative_url }}">
+        <h1>{{ site.title | default: site.github.repository_name }}</h1>
+      </a>
+      <h2>{{ site.description | default: site.github.project_tagline }}</h2>
 
-    <section id="downloads">
-      <div class="badge-row">
-      
-        {% if site.github.url %}
-          <!-- GitHub -->
-          <a href="{{ site.github.url }}" target="_blank" rel="noopener">
-            <img alt="GitHub Profile"
-                 src="https://img.shields.io/badge/GitHub-Profile-181717?style=flat&logo=github&logoColor=white">
-          </a>
-        {% endif %}
+      <section id="downloads">
+        <div class="badge-row">
+          {% if site.github.url %}
+            <a href="{{ site.github.url }}" target="_blank" rel="noopener">
+              <img alt="GitHub Profile" src="https://img.shields.io/badge/GitHub-Profile-181717?style=flat&logo=github&logoColor=white">
+            </a>
+          {% endif %}
 
-        {% if site.linkedin and site.linkedin.url %}
-          <!-- LinkedIn -->
-          <a href="{{ site.linkedin.url }}" target="_blank" rel="noopener">
-            <img alt="LinkedIn Profile"
-                 src="https://img.shields.io/badge/LinkedIn-Profile-0A66C2?style=flat&logo=linkedin&logoColor=white">
-          </a>
-        {% endif %}
+          {% if site.linkedin and site.linkedin.url %}
+            <a href="{{ site.linkedin.url }}" target="_blank" rel="noopener">
+              <img alt="LinkedIn Profile" src="https://img.shields.io/badge/LinkedIn-Profile-0A66C2?style=flat&logo=linkedin&logoColor=white">
+            </a>
+          {% endif %}
 
-        {% if site.orcid and site.orcid.url %}
-          <!-- ORCID -->
-          <a href="{{ site.orcid.url }}" target="_blank" rel="noopener">
-            <img alt="ORCID"
-                 src="https://img.shields.io/badge/ORCID-Profile-A6CE39?style=flat&logo=orcid&logoColor=white">
-          </a>
-        {% endif %}
+          {% if site.orcid and site.orcid.url %}
+            <a href="{{ site.orcid.url }}" target="_blank" rel="noopener">
+              <img alt="ORCID" src="https://img.shields.io/badge/ORCID-Profile-A6CE39?style=flat&logo=orcid&logoColor=white">
+            </a>
+          {% endif %}
 
-        {% if site.scholar and site.scholar.url %}
-          <!-- Google Scholar -->
-          <a href="{{ site.scholar.url }}" target="_blank" rel="noopener">
-            <img alt="Google Scholar"
-                 src="https://img.shields.io/badge/Google%20Scholar-Profile-4285F4?style=flat&logo=google-scholar&logoColor=white">
-          </a>
-        {% endif %}
+          {% if site.scholar and site.scholar.url %}
+            <a href="{{ site.scholar.url }}" target="_blank" rel="noopener">
+              <img alt="Google Scholar" src="https://img.shields.io/badge/Google%20Scholar-Profile-4285F4?style=flat&logo=google-scholar&logoColor=white">
+            </a>
+          {% endif %}
 
-        {% if site.show_downloads and site.github.zip_url %}
-          <!-- Resume (One-page (Outdated)) -->
-          <a href="{{ site.github.zip_url }}" target="_blank" rel="noopener">
-            <img alt="Resume (PDF)"
-                 src="https://img.shields.io/badge/Resume-One--Page%20PDF-EA4335?style=flat&logo=adobeacrobatreader&logoColor=white">
-          </a>
-        {% endif %}
+          {% if site.show_downloads and site.github.zip_url %}
+            <a href="{{ site.github.zip_url }}" target="_blank" rel="noopener">
+              <img alt="Resume (PDF)" src="https://img.shields.io/badge/Resume-One--Page%20PDF-EA4335?style=flat&logo=adobeacrobatreader&logoColor=white">
+            </a>
+          {% endif %}
+        </div>
 
-        {% if site.github.pink_url %}
-          <!-- Resume (Two-page PDF) 
-          <a href="{{ site.github.pink_url }}" target="_blank" rel="noopener">
-            <img alt="Resume (Two-page PDF)"
-                 src="https://img.shields.io/badge/Resume-Two--Page%20PDF-EA4335?style=flat&logo=adobeacrobatreader&logoColor=white">
-          </a>-->
-        {% endif %}
+        <!-- Optional: keep a compact dropdown, now dark-themed -->
+        <!--
+        <div class="dropdown" style="margin-top:10px;">
+          <button class="btn">More</button>
+          <div class="dropdown-content">
+            <a href="{{ site.github.pink_url }}" target="_blank">Two-Page Resume</a>
+          </div>
+        </div>
+        -->
+      </section>
+    </div>
+  </header>
 
-      </div>
-    </section>
+  <div class="wrapingimage">
+    <img src="8B2DCC39-F334-4769-9A73-C81CA526CB4C.jpg" width="200" alt="Additi Pandey portrait">
   </div>
-</header>
-
-
-  <style>
-    .wrapingimage {
-      float: left;
-      margin: 30px 12px 3px 4px;
-      border: 2px solid cyan;
-    }
-  </style>  
-  <div class="wrapingimage">   
-    <img src="8B2DCC39-F334-4769-9A73-C81CA526CB4C.jpg" width="200">
-  </div>   
 
   <div class="container">
     <section id="main_content">
       {{ content }}
     </section>
   </div>
-    
-  <style type="text/css">
-    .tg {border-collapse:collapse;border-spacing:0;width: 70%; margin-left: auto; margin-right: auto;}
-    .tg td{border-color:cyan;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-      overflow:hidden;padding:10px 5px;word-break:normal;}
-    .tg th{border-color:cyan;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-      font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-    .tg .tg-0lax{text-align:left;vertical-align:top}
+
+  <!-- Publications auto-fill block -->
+  <div class="container" style="margin-top:18px;">
+    <!-- PUBLICATIONS:START -->
+    <!-- (leave this empty; the Action fills this) -->
+    <!-- PUBLICATIONS:END -->
+  </div>
+
+  <!-- Curated posts table -->
+  <style>
+    /* keep table CSS here to avoid Jekyll reordering surprises */
   </style>
-  <!-- PUBLICATIONS:START -->
-<!-- (leave this empty; the Action fills it) -->
-<!-- PUBLICATIONS:END -->
   <table class="tg">
     <thead>
       <tr>
@@ -191,7 +216,7 @@
         <th class="tg-0lax"><b>Computer Science</b></th>
         <th class="tg-0lax"><b>Other Works</b></th>
       </tr>
-    </thead> 
+    </thead>
     <tbody>
       <tr>
         <td class="tg-0lax"><a href="https://cyclot0micextension.wordpress.com/2020/09/06/instant-insanity-puzzle/">Trapped in an Insanity Puzzle</a></td>
@@ -204,44 +229,35 @@
         <td class="tg-0lax"><a href="https://ficjmc.wordpress.com/2020/09/04/neuroeconomics-by-additi-pandey/">Introducing Neuroeconomics</a></td>
       </tr>
       <tr>
-        <td class="tg-0lax">Statistics for Data Science <a href="https://cyclot0micextension.wordpress.com/2023/02/03/statistics-for-data-science-part-1/">1</a>,<a href="https://cyclot0micextension.wordpress.com/2023/02/03/statistics-for-data-science-part-2/">2</a>,<a href="https://cyclot0micextension.wordpress.com/2023/02/04/statistics-for-data-science-part-3/">3</a></td>
+        <td class="tg-0lax">Statistics for Data Science
+          <a href="https://cyclot0micextension.wordpress.com/2023/02/03/statistics-for-data-science-part-1/">1</a>,
+          <a href="https://cyclot0micextension.wordpress.com/2023/02/03/statistics-for-data-science-part-2/">2</a>,
+          <a href="https://cyclot0micextension.wordpress.com/2023/02/04/statistics-for-data-science-part-3/">3</a>
+        </td>
         <td class="tg-0lax"><a href="https://cyclot0micextension.wordpress.com/2023/02/05/algorithm-analysis/">Algorithm Analysis</a></td>
         <td class="tg-0lax"><a href="https://cyclot0micextension.wordpress.com/2023/03/10/psychology-and-decision-making/">Psychology and Decision Making</a></td>
       </tr>
     </tbody>
   </table>
-  I recently started a 'Wrapping My Head Around' series for concepts that I initially thought are hard but seem to trivial now:
-<ul>
-  <li><a href="https://wordpress.com/post/cyclot0micextension.wordpress.com/514">NumPy Broadcasting</a></li>
-  <li><a href="https://cyclot0micextension.wordpress.com/2023/02/08/wrapping-my-head-around-matplotlib/">matplotlib</a></li>
-  <li><a href="https://cyclot0micextension.wordpress.com/2023/02/18/categorical-data-encoders/">Categorical Data Encoders</a></li>
-  <li><a href="https://cyclot0micextension.wordpress.com/2023/02/24/wrapping-my-head-around-anomalous-behaviour-of-logical-operators-in-python/">Logical vs Bitwise Operators</a></li>
-  <li><a href="https://cyclot0micextension.wordpress.com/2023/03/01/imperative-programming-paradigm/">Imperative Programming Paradigm</a></li>
-</ul>
-+++
-    I would love to hear from you! 
-<form
-  action="https://formspree.io/f/xaygwqrk"
-  method="POST"
-  >
-  <label>
-    Your email:
-    <input type="email" name="email">
-  </label>
-  <label>
-    Your message:
-    <textarea name="message"></textarea>
-  </label>
-  <!-- your other form fields go here -->
-  <button type="submit">Send</button>
-</form>
-  <br>
 
-  <style type="text/css">
-    .container h1 {
-      color: white;
-    }
-  </style>
+  <div class="container" style="max-width: 860px;">
+    <p>I recently started a ‘Wrapping My Head Around’ series for concepts that I initially thought were hard but seem trivial now:</p>
+    <ul>
+      <li><a href="https://wordpress.com/post/cyclot0micextension.wordpress.com/514">NumPy Broadcasting</a></li>
+      <li><a href="https://cyclot0micextension.wordpress.com/2023/02/08/wrapping-my-head-around-matplotlib/">matplotlib</a></li>
+      <li><a href="https://cyclot0micextension.wordpress.com/2023/02/18/categorical-data-encoders/">Categorical Data Encoders</a></li>
+      <li><a href="https://cyclot0micextension.wordpress.com/2023/02/24/wrapping-my-head-around-anomalous-behaviour-of-logical-operators-in-python/">Logical vs Bitwise Operators</a></li>
+      <li><a href="https://cyclot0micextension.wordpress.com/2023/03/01/imperative-programming-paradigm/">Imperative Programming Paradigm</a></li>
+    </ul>
+
+    <p><strong>I would love to hear from you!</strong></p>
+    <form action="https://formspree.io/f/xaygwqrk" method="POST">
+      <label>Your email:<input type="email" name="email" required></label>
+      <label>Your message:<textarea name="message" rows="4" required></textarea></label>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
   <footer>
     <div class="container">
       <p>
