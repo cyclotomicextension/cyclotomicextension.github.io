@@ -10,24 +10,43 @@
   {% include head-custom.html %}
   {% seo %}
 
-  <style>
-    /* =========================
-       THEME TOKENS (edit here)
-       ========================= */
-    :root{
-      --bg: #0b0f18;
-      --bg-img: url('https://raw.githubusercontent.com/cyclotomicextension/cyclotomicextension.github.io/88ce2405810e2c89a72c4b78edeee6933647f76c/DALL%C2%B7E%202023-06-26%2003.14.25%20-%20a%20painting%20with%20a%20window%20showing%20northern%20skies%20and%20a%20telescope%20and%20books%20and%20a%20computer%20in%20owl%20city%27s%20fireflies%20room.png');
-      --text: #ffffff;
-      --muted: #cfd8ff;
-      --link: #9bd3ff;
-      --link-hover: #d1ecff;
-      --accent: #00e5ff;          /* borders & highlights */
-      --accent-weak: rgba(0,229,255,.35);
-      --card: rgba(255,255,255,.06);  /* panels, dropdowns, table cells */
-      --card-strong: rgba(0,0,0,.35);
-      --shadow: 0 8px 24px rgba(0,0,0,.35);
-      --radius: 14px;
-    }
+   <style>
+  /* ---- theme knobs ---- */
+  :root{
+    --bg: #0b1b5c;              /* dark royal blue */
+    --text: #ffffff;
+    --link: #9bd3ff;
+    --link-hover: #d8ecff;
+    --accent: #59d0ff;
+
+    /* dotted pattern controls */
+    --dot-gap: 28px;            /* spacing between dots */
+    --dot-size: 2px;            /* dot radius */
+    --dot1: rgba(255,255,255,.08);
+    --dot2: rgba(255,255,255,.05);
+  }
+
+  html, body { height: 100%; }
+  body{
+    margin:0;
+    color: var(--text);
+    background-color: var(--bg);
+    /* Dotted fill pattern (two staggered radial grids) */
+    background-image:
+      radial-gradient(circle, var(--dot1) var(--dot-size), transparent calc(var(--dot-size) + 1px)),
+      radial-gradient(circle, var(--dot2) var(--dot-size), transparent calc(var(--dot-size) + 1px));
+    background-size: var(--dot-gap) var(--dot-gap), var(--dot-gap) var(--dot-gap);
+    background-position: 0 0, calc(var(--dot-gap)/2) calc(var(--dot-gap)/2);
+  }
+
+  /* keep links readable on the dark blue */
+  a, a:visited { color: var(--link) !important; }
+  a:hover, a:focus { color: var(--link-hover) !important; text-decoration: underline; }
+
+  /* optional: unify borders/buttons with the accent */
+  .btn { color:#fff !important; border-color: var(--accent) !important; }
+  .wrapingimage { border:2px solid var(--accent); }
+  .tg td, .tg th { border-color: rgba(89,208,255,.35); }
 
     /* =========
        GLOBALS
