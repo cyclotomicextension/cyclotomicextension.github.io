@@ -23,7 +23,6 @@
 
 </ol>
 
-<div class="container" style="max-width: 860px; margin-top: 18px;">
   <h2>Mentorship</h2>
   <p>
     Outside my own research, I like to mentor students, especially those interested in numerical analysis, operator learning, and physics-informed neural networks.
@@ -40,5 +39,4 @@
   </span>
 </li>
   </ul>
- </div>
 
