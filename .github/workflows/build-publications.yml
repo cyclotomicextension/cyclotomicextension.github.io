@@ -26,41 +26,24 @@ jobs:
                  --bibliography=publications.bib \
                  pubs_src.md -o publications.html
 
-      - name: Splice publications into README between markers
-  shell: bash
-  run: |
-    set -euo pipefail
-    ls -l || true
-    echo "Updating README.md with publications.html"
-    python3 - <<'PY'
-import pathlib, re, sys
+      - name: Splice publications into README (no heredoc)
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > splice_pubs.py <<'PY'
+      import pathlib, re, sys
+      readme = pathlib.Path("README.md").read_text(encoding="utf-8")
+      html   = pathlib.Path("publications.html").read_text(encoding="utf-8")
+      start  = "<!-- PUBLICATIONS:START -->"
+      end    = "<!-- PUBLICATIONS:END -->"
+      pat = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
+      rep = f"{start}\n{html}\n{end}"
+      out = pat.sub(rep, readme) if pat.search(readme) else readme.rstrip() + "\n\n" + rep + "\n"
+      pathlib.Path("README.md").write_text(out, encoding="utf-8")
+      print("README.md updated.")
+      PY
+          python3 splice_pubs.py
 
-readme_path = pathlib.Path("README.md")
-html_path   = pathlib.Path("publications.html")
-
-if not readme_path.exists():
-    sys.exit("ERROR: README.md not found")
-if not html_path.exists():
-    sys.exit("ERROR: publications.html not found")
-
-readme = readme_path.read_text(encoding="utf-8")
-html   = html_path.read_text(encoding="utf-8")
-
-start = "<!-- PUBLICATIONS:START -->"
-end   = "<!-- PUBLICATIONS:END -->"
-
-pattern = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
-replacement = f"{start}\n{html}\n{end}"
-
-if pattern.search(readme):
-    updated = pattern.sub(replacement, readme)
-else:
-    # If markers are missing, append them at the end
-    updated = readme.rstrip() + "\n\n" + replacement + "\n"
-
-readme_path.write_text(updated, encoding="utf-8")
-print("README.md updated.")
-PY
 
       - name: Commit changes
         run: |
