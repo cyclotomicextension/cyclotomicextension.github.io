@@ -3,5 +3,7 @@
 <p>I hold a ScM in Applied Mathematics from Brown University, an MSc in Pure Mathematics from Imperial College London, and a Bachelor of Science degree in Mathematics from Jesus and Mary College, University of Delhi. In addition to this, I attended a graduate summer school in 2021 at the Tata Institute of Fundamental Research and a summer school on AI and computer vision in 2023 at the International Institute of Information Technology, Hyderabad. My research experience encompasses work in the areas of algebraic number theory, epidemic modeling, geometry, and group theory, which I have conducted at institutions such as Imperial College London, IIT Kanpur, Delhi University, and the Harish Chandra Research Institute in Allahabad.<p>
 <!-- 
 <p>This website features my resume (perhaps, an outdated one), links to my blog, and a selection of projects that I have undertaken to explore my diverse interests. If you share any of these interests, I invite you to visit my blog, where I occasionally offer reflections and insights on my academic experiences, as well as provide guidance on the application process for internships. These can be accessed <a href="http://cyclot0micextension.wordpress.com/">here!</a>. Moreover, if you enjoy mathematics and physics-related videos, you can check out my <a href="https://www.youtube.com/@CyclotomicExposition"> YouTube channel</a>.<p> -->
-
+  
+<!-- PUBLICATIONS:START -->
 <p><em>Publications and Preprints</em></p>
+<!-- PUBLICATIONS:END -->
