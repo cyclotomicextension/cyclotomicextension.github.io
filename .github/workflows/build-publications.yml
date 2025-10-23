@@ -32,34 +32,38 @@ jobs:
         run: |
           set -euo pipefail
       
-          echo "Repo root:"
-          ls -la
-      
-          # Find a .bib file (supports both names)
+          # Find your .bib (supports either filename)
           BIB=""
           for c in publications.bib publication.bib; do
             if [ -f "$c" ]; then BIB="$c"; break; fi
           done
           if [ -z "$BIB" ]; then
-            echo "ERROR: No publications.bib or publication.bib found at repo root."
+            echo "ERROR: No publications.bib or publication.bib at repo root."
             exit 1
           fi
           echo "Using bibliography: $BIB"
           sed -n '1,40p' "$BIB" || true
       
-          # Build APA-formatted HTML, include all entries, add a section title.
-          # No heredoc: feed empty stdin so Pandoc still runs.
-          pandoc --to=html --citeproc \
+          # Write a tiny Markdown source with nocite + a header
+          # (no heredoc => no YAML parse issues)
+          {
+            printf '---\n'
+            printf 'nocite: |\n'
+            printf '  @*\n'
+            printf '---\n\n'
+            printf '# Publications\n'
+          } > pubs_src.md
+      
+          # Build APA-formatted HTML
+          pandoc --from=markdown --to=html --citeproc \
                  --csl=https://www.zotero.org/styles/apa \
                  --bibliography="$BIB" \
-                 --metadata nocite='@*' \
-                 --metadata reference-section-title="Publications" \
-                 -o publications.html < /dev/null
+                 pubs_src.md -o publications.html
       
           echo "First 40 lines of publications.html ->"
           head -n 40 publications.html || true
       
-          # Fail early if bibliography didn't render
+          # Fail if bibliography still didn't render
           if ! grep -qi '<div[^>]*id="refs' publications.html; then
             echo "ERROR: No references rendered. Check that $BIB has valid entries."
             exit 2
