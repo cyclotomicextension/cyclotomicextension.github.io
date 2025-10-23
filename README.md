@@ -34,7 +34,7 @@
   <strong>Summer Mentor</strong>, CRUNCH Group (Summer 2025) — mentored a high-school student on modeling Black–Scholes equations using PINNs.
   <span class="badge-row" style="display:inline-flex; gap:8px; margin-left:8px;">
     <a href="https://sites.google.com/view/blackscholes-bobbywholey/home" target="_blank" rel="noopener">
-      <img alt="Live Site"
+      <img alt="Project Details"
            src="https://img.shields.io/badge/Live%20Site-Open-2ea44f?style=flat&logo=google-chrome&logoColor=white">
     </a>
   </span>
