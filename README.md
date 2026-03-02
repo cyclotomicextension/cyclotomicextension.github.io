@@ -7,6 +7,13 @@
 <h2 id="publications">Publications and Preprints</h2>
 
 <ol class="pubs">
+
+  <li>
+    Pandey, Additi, Liang Wei, Hessam Babaee, and George Em Karniadakis. 
+    "Kinetic-Mamba: Mamba-Assisted Predictions of Stiff Chemical Kinetics." 
+    <em>arXiv</em> preprint arXiv:2512.14471 (2025).
+    <a href="https://arxiv.org/abs/2512.14471" target="_blank" rel="noopener">arXiv:2512.14471</a>
+  </li>
   
   <li>
     Nath, Kamaljyoti, <strong>Additi Pandey</strong>, Bryan T. Susi, Hessam Babaee, and George Em Karniadakis.
