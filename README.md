@@ -3,30 +3,3 @@
 <p>I hold a ScM in Applied Mathematics from Brown University, an MSc in Pure Mathematics from Imperial College London, and a Bachelor of Science degree in Mathematics from Jesus and Mary College, University of Delhi. Additionally, I attended a graduate summer school at the Tata Institute of Fundamental Research in 2021 and a summer school on AI and computer vision at the International Institute of Information Technology, Hyderabad, in 2023. My research experience encompasses work in the areas of algebraic number theory, epidemic modeling, geometry, and group theory, which I have conducted at institutions such as Imperial College London, IIT Kanpur, Delhi University, and the Harish Chandra Research Institute in Allahabad.</p>
 <!-- 
 <p>This website features my resume (perhaps, an outdated one), links to my blog, and a selection of projects that I have undertaken to explore my diverse interests. If you share any of these interests, I invite you to visit my blog, where I occasionally offer reflections and insights on my academic experiences, as well as provide guidance on the internship application process. These can be accessed <a href="http://cyclot0micextension.wordpress.com/">here!</a>. Moreover, if you enjoy mathematics and physics-related videos, you can check out my <a href="https://www.youtube.com/@CyclotomicExposition"> YouTube channel</a>.<p> -->
-  
-<h2 id="publications">Publications and Preprints</h2>
-
-<ol class="pubs">
-
-  <li>
-    <strong>Pandey, Additi</strong>, Liang Wei, Hessam Babaee, and George Em Karniadakis. 
-    "Kinetic-Mamba: Mamba-Assisted Predictions of Stiff Chemical Kinetics." 
-    <em>arXiv</em> preprint arXiv:2512.14471 (2025).
-    <a href="https://arxiv.org/abs/2512.14471" target="_blank" rel="noopener">arXiv:2512.14471</a>
-  </li>
-  
-  <li>
-    Nath, Kamaljyoti, <strong>Additi Pandey</strong>, Bryan T. Susi, Hessam Babaee, and George Em Karniadakis.
-    “AMORE: Adaptive Multi-Output Operator Network for Stiff Chemical Kinetics.”
-    <em>arXiv</em> preprint arXiv:2510.12999 (2025).
-    <a href="https://arxiv.org/abs/2510.12999" target="_blank" rel="noopener">arXiv:2510.12999</a>
-  </li>
-  
-  <li>
-    Shukla, Khemraj, Zongren Zou, Chi Hin Chan, <strong>Additi Pandey</strong>, Zhicheng Wang, and George Em Karniadakis.
-    “NeuroSEM: A hybrid framework for simulating multiphysics problems by coupling PINNs and spectral elements.”
-    <em>Computer Methods in Applied Mechanics and Engineering</em> 433 (2025): 117498.
-  </li>
-
-</ol>
-
