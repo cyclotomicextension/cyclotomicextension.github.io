@@ -2,326 +2,637 @@
 <html lang="{{ site.lang | default: 'en-US' }}">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Theme CSS loads first so our overrides win -->
-  <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-  {% include head-custom.html %}
   {% seo %}
 
-  <!-- Academic fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 
   <style>
-    /* =========================
-       Site Theme (edit tokens)
-       ========================= */
-    :root{
-      --bg: #512223;                 /* deep maroon */
-      --text: #ffffff;               /* main text */
-      --muted: #e7d7d7;              /* labels / secondary */
-      --link: #9bd3ff;               /* link */
-      --link-hover: #d8ecff;         /* link hover */
-      --accent: #59d0ff;             /* borders / highlights */
-      --accent-weak: rgba(89,208,255,.35);
-      --card: rgba(255,255,255,.06); /* panels */
-      --card-strong: rgba(0,0,0,.35);
-      --shadow: 0 8px 24px rgba(0,0,0,.35);
-      --radius: 14px;
-
-      /* dotted pattern */
-      --dot-gap: 28px;
-      --dot-size: 2px;
-      --dot1: rgba(255,255,255,.08);
-      --dot2: rgba(255,255,255,.05);
+    /* ---------- settings: change the look here ---------- */
+    :root {
+      --paper: #f7f3ea;   /* page background */
+      --ink: #1c1a17;     /* main text */
+      --muted: #5f5a4e;   /* secondary text */
+      --rule: #d6cebb;    /* thin lines */
+      --accent: #6b1f24;  /* links, stars, squiggles */
+      --width: 640px;     /* width of the text column */
     }
 
-    /* =========
-       GLOBALS
-       ========= */
-    html, body { height: 100%; }
-    body{
-      margin:0;
-      color: var(--text);
-      background-color: var(--bg);
-      /* Subtle dotted background */
-      background-image:
-        radial-gradient(circle, var(--dot1) var(--dot-size), transparent calc(var(--dot-size) + 1px)),
-        radial-gradient(circle, var(--dot2) var(--dot-size), transparent calc(var(--dot-size) + 1px));
-      background-size: var(--dot-gap) var(--dot-gap), var(--dot-gap) var(--dot-gap);
-      background-position: 0 0, calc(var(--dot-gap)/2) calc(var(--dot-gap)/2);
+    /* ---------- page ---------- */
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
       font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
-      font-size: 17px;
+      font-size: 18px;
       line-height: 1.65;
-      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
+    }
+    .page {
+      max-width: var(--width);
+      margin: 0 auto;
+      padding: 56px 24px 48px;
     }
 
-    /* Typography */
-    h1, h2, h3, .container h1, .container h2{
-      font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+    /* ---------- header ---------- */
+    .top {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+    }
+    .photo {
+      width: 96px;
+      padding: 5px 5px 14px;
+      background: #fffdf8;
+      border: 1px solid var(--rule);
+      transform: rotate(-3deg);
+    }
+    .photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .top h1 {
+      font-family: "EB Garamond", Georgia, serif;
+      font-weight: 500;
+      font-size: 40px;
+      line-height: 1.1;
+      margin: 0;
+    }
+    .top h1 a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .say {
+      color: var(--accent);
+      font-size: 17px;
+      margin: 2px 0 0;
+    }
+    .where {
+      color: var(--muted);
+      font-size: 16px;
+      margin: 2px 0 0;
+    }
+    .elsewhere {
+      font-size: 15px;
+      margin: 22px 0 0;
+    }
+    .elsewhere a {
+      margin-right: 16px;
+      white-space: nowrap;
+    }
+
+    /* ---------- top right corner: stars, the two cats on a ledge, and the Cats link ---------- */
+    .catcorner {
+      position: absolute;
+      right: 0;
+      top: -38px;
+      width: 100px;
+      text-align: center;
+      text-decoration: none;
+    }
+    .stars {
+      display: block;
+      width: 44px;
+      height: 34px;
+      margin: 0 auto 2px;
+      fill: var(--accent);
+    }
+    .ledge {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 6px;
+      border-bottom: 1px solid var(--muted);
+    }
+    .ledge svg {
+      display: block;
+      overflow: visible;
+      fill: var(--paper);
+      stroke: var(--ink);
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .catcorner:hover .ledge svg {
+      stroke: var(--accent);
+    }
+    /* the drawing is 58 units tall and the cat sits at 40, so the tail hangs below the ledge */
+    .big-cat { width: 40px; height: 58px; margin-bottom: -18px; }
+    .small-cat { width: 30px; height: 43.5px; margin-bottom: -13.5px; }
+    .ledge .tail {
+      fill: none;
+      transform-origin: 29px 38px;
+      animation: swish 3s ease-in-out infinite alternate;
+    }
+    .small-cat .tail {
+      animation-duration: 1.7s;
+    }
+    @keyframes swish {
+      from { transform: rotate(-10deg); }
+      to { transform: rotate(12deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ledge .tail { animation: none; }
+    }
+    /* the word "Cats" under the ledge; it gets the squiggle when the Cats page is open */
+    #tab-cats {
+      display: inline-block;
+      margin-top: 15px;
+      padding-bottom: 8px;
+      font-family: "EB Garamond", Georgia, serif;
+      font-style: italic;
+      font-size: 20px;
+      line-height: 1.2;
+      color: var(--muted);
+    }
+    .catcorner:hover #tab-cats {
+      color: var(--ink);
+    }
+
+    /* ---------- tabs ---------- */
+    .tabs {
+      border-bottom: 1px solid var(--rule);
+      margin: 26px 0 30px;
+      padding-bottom: 10px;
+    }
+    .tabs a {
+      font-family: "EB Garamond", Georgia, serif;
+      font-style: italic;
+      font-size: 22px;
+      color: var(--muted);
+      text-decoration: none;
+      margin-right: 22px;
+      padding-bottom: 8px;
+      white-space: nowrap;
+    }
+    .tabs a:hover {
+      color: var(--ink);
+    }
+    /* the open tab gets a hand-drawn squiggle under it */
+    .tabs a.on, #tab-cats.on {
+      color: var(--ink);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='6'%3E%3Cpath d='M0 3 Q5 0 10 3 T20 3 T30 3 T40 3' fill='none' stroke='%236b1f24' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-position: left bottom;
+    }
+
+    /* ---------- text ---------- */
+    h2 {
+      font-family: "EB Garamond", Georgia, serif;
+      font-weight: 500;
+      font-size: 26px;
+      line-height: 1.2;
+      margin: 36px 0 12px;
+    }
+    h4 {
+      font-family: "Source Serif 4", Georgia, serif;
       font-weight: 600;
-      letter-spacing: .2px;
-      color: var(--text);
-      margin: 0.2rem 0;
+      font-size: 17px;
+      margin: 24px 0 4px;
     }
-    h1{ font-size: clamp(28px, 4vw, 40px); }
-    h2{ font-size: clamp(22px, 3vw, 28px); }
+    p {
+      margin: 0 0 16px;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+    a:hover {
+      color: var(--ink);
+    }
+    ul, ol {
+      margin: 0 0 16px;
+      padding-left: 22px;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+    sup {
+      line-height: 0;
+    }
+    ol.pubs li {
+      margin-bottom: 16px;
+    }
+    /* big first letter on the About tab */
+    #about p:first-of-type::first-letter {
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: 62px;
+      line-height: 0.85;
+      float: left;
+      padding: 6px 8px 0 0;
+      color: var(--accent);
+    }
 
-    /* Remove any default underline/lines under headings/header */
-    header, .site-header, .page-header,
-    #a-title h1, h1, h2 { border:0 !important; box-shadow:none !important; background-image:none !important; }
-    header::before, header::after, h1::after, h2::after { content:none !important; }
+    ul.talks li {
+      margin-bottom: 14px;
+    }
 
-    /* Links */
-    a, a:visited { color: var(--link) !important; }
-    a:hover, a:focus { color: var(--link-hover) !important; text-decoration: underline; outline: none; }
+    /* ---------- cats ---------- */
+    .cat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 36px;
+      justify-content: center;
+      margin-top: 28px;
+    }
+    .cat-photo {
+      width: 230px;
+      padding: 10px 10px 4px;
+      background: #fffdf8;
+      border: 1px solid var(--rule);
+    }
+    .tilt-left { transform: rotate(-3deg); }
+    .tilt-right { transform: rotate(2deg); }
+    .cat-frame {
+      position: relative;
+      width: 230px;
+      height: 230px;
+      background: var(--paper);
+    }
+    .cat-frame svg {
+      position: absolute;
+      left: 45px;
+      top: 45px;
+      width: 140px;
+      height: 140px;
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .cat-frame img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .cat-photo p {
+      font-family: "Caveat", "Segoe Print", cursive;
+      font-size: 26px;
+      text-align: center;
+      margin: 6px 0 4px;
+    }
 
-    /* Header + badges */
-    header { padding-top: 10px; padding-bottom: 6px; backdrop-filter: blur(3px); }
-    #downloads { margin-top: .35rem; }
-    .badge-row{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:10px; }
-    .badge-row a img{ height:28px; vertical-align:middle; filter: saturate(.95) contrast(1.05); }
-    @media (max-width: 600px){ .badge-row a img{ height:24px; } }
+    /* ---------- contact form ---------- */
+    label {
+      display: block;
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+    input, textarea {
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      margin-top: 4px;
+      padding: 8px 10px;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      background: #fffdf8;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 16px;
+    }
+    input:focus, textarea:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+    }
+    button {
+      padding: 8px 18px;
+      border: 1px solid var(--ink);
+      border-radius: 2px;
+      background: transparent;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
 
-    /* Dropdown (optional, dark-themed) */
-    .dropdown{ position: relative; display: inline-block; }
-    .dropdown .btn{
-      display:inline-block; padding:8px 12px; border:1px solid var(--accent);
-      color: var(--text) !important; background: transparent; border-radius: var(--radius);
+    /* ---------- footer ---------- */
+    footer {
+      margin-top: 56px;
+      text-align: center;
+      color: var(--muted);
     }
-    .dropdown-content{
-      display:none; position:absolute; background-color: var(--card);
-      min-width: 220px; box-shadow: var(--shadow); z-index: 10; border:1px solid var(--accent-weak);
-      border-radius: var(--radius); overflow:hidden;
+    footer .paws {
+      margin: 0 0 6px;
     }
-    .dropdown-content a{ color: var(--text) !important; padding:10px 12px; text-decoration:none; display:block; }
-    .dropdown-content a:hover{ background: rgba(255,255,255,.10); }
-    .dropdown:hover .dropdown-content{ display:block; }
-    .dropdown:hover .btn{ background: var(--card-strong); }
+    footer .paws svg {
+      width: 16px;
+      height: 15px;
+      margin: 0 7px;
+      fill: var(--accent);
+      opacity: 0.6;
+    }
 
-    /* Profile image */
-    .wrapingimage{
-      float:left; margin: 30px 12px 3px 4px;
-      border: 2px solid var(--accent); border-radius: 12px;
-      box-shadow: var(--shadow);
+    /* ---------- phones ---------- */
+    @media (max-width: 600px) {
+      body { font-size: 17px; }
+      .page { padding: 36px 18px 40px; }
+      .top { gap: 16px; }
+      .photo { width: 72px; }
+      .top h1 { font-size: 30px; }
+      .stars { display: none; }
+      .catcorner { position: static; display: block; width: 100px; margin: 18px 0 0 auto; }
+      .tabs { margin-top: 10px; }
+      .tabs a { font-size: 20px; margin-right: 16px; line-height: 2; }
     }
-    .wrapingimage img{ display:block; border-radius: 10px; }
-
-    /* Tables */
-    .tg{
-      border-collapse:collapse; border-spacing:0; width: 70%;
-      margin: 24px auto; background: var(--card); border-radius: var(--radius); overflow:hidden;
-    }
-    .tg td, .tg th{
-      border-color: var(--accent-weak); border-style:solid; border-width:1px;
-      font-size:14px; padding:12px 10px; color: var(--text);
-    }
-    .tg th{
-      background: linear-gradient(0deg, rgba(255,255,255,.05), rgba(255,255,255,.1));
-      font-weight:600;
-    }
-    .tg .tg-0lax{ text-align:left; vertical-align:top; }
-
-    /* Forms */
-    form{
-      background: var(--card); padding: 16px; border:none;
-      border-radius: var(--radius); box-shadow: none;
-      width: 90%; margin: 48px auto;
-    }
-    label{ display:block; margin:10px 0 6px; color: var(--muted) !important; }
-    input, textarea, select{
-      width:100%; padding:12px 12px; border-radius:10px;
-      border:1px solid var(--accent-weak); background: rgba(0,0,0,.35); color: var(--text);
-    }
-    input:focus, textarea:focus, select:focus{
-      outline:none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(89,208,255,.18);
-    }
-    button[type="submit"]{
-      margin-top:10px; padding:10px 14px; border-radius:10px; border:1px solid var(--accent);
-      background: transparent; color: var(--text); cursor:pointer;
-    }
-    button[type="submit"]:hover{ background: var(--card-strong); }
-
-    /* Footer */
-    footer .container a{ color: var(--link); }
-    footer .container a:hover{ color: var(--link-hover); }
-
-    /* Selection color */
-    ::selection{ background: rgba(89,208,255,.28); color: var(--text); }
   </style>
-
-  <style>
-  .badge-row .push-right { margin-left: auto; }
-</style>
-
 </head>
 
 <body>
+<div class="page">
+
   <header>
-    <div class="container">
-      <a id="a-title" href="{{ '/' | relative_url }}">
-        <h1>{{ site.title | default: site.github.repository_name }}</h1>
+    <div class="top">
+      <div class="photo">
+        <img src="{{ '/8B2DCC39-F334-4769-9A73-C81CA526CB4C.jpg' | relative_url }}" alt="Additi Pandey portrait">
+      </div>
+      <div>
+        <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+        <p class="say">{{ site.description }}</p>
+        <p class="where">PhD candidate, Division of Applied Mathematics, Brown University</p>
+      </div>
+      <!-- top right corner: stars, Fermi and Oppenheimer on a ledge, and the link to the Cats page -->
+      <a class="catcorner" href="#cats">
+        <svg class="stars" viewBox="0 0 70 55" aria-hidden="true">
+          <path transform="translate(50,16) scale(1.5)" d="M0,-8 Q0,0 8,0 Q0,0 0,8 Q0,0 -8,0 Q0,0 0,-8 Z"/>
+          <path transform="translate(22,28) scale(0.8)" d="M0,-8 Q0,0 8,0 Q0,0 0,8 Q0,0 -8,0 Q0,0 0,-8 Z"/>
+          <path transform="translate(42,44) scale(0.5)" d="M0,-8 Q0,0 8,0 Q0,0 0,8 Q0,0 -8,0 Q0,0 0,-8 Z"/>
+        </svg>
+        <span class="ledge">
+          <svg class="big-cat" viewBox="0 0 40 58" aria-hidden="true">
+            <title>Fermi</title>
+            <path class="tail" d="M29 38 C37 40 38 49 33 55"/>
+            <path d="M10 40 C8 26 14 18 20 18 C26 18 32 26 30 40 Z"/>
+            <path d="M13.5 9 L13 1 L19 6 M26.5 9 L27 1 L21 6"/>
+            <circle cx="20" cy="13" r="8"/>
+            <path d="M17 12 L17 13.5 M23 12 L23 13.5 M19 16 L20 17 L21 16"/>
+          </svg>
+          <svg class="small-cat" viewBox="0 0 40 58" aria-hidden="true">
+            <title>Oppenheimer</title>
+            <path class="tail" d="M29 38 C37 40 38 49 33 55"/>
+            <path d="M10 40 C8 26 14 18 20 18 C26 18 32 26 30 40 Z"/>
+            <path d="M13.5 9 L13 1 L19 6 M26.5 9 L27 1 L21 6"/>
+            <circle cx="20" cy="13" r="8"/>
+            <path d="M17 12 L17 13.5 M23 12 L23 13.5 M19 16 L20 17 L21 16"/>
+          </svg>
+        </span>
+        <span id="tab-cats">Cats</span>
       </a>
-      <h2>{{ site.description | default: site.github.project_tagline }}</h2>
-
-      <section id="downloads">
-        <div class="badge-row">
-          {% if site.github.url %}
-            <a href="{{ site.github.url }}" target="_blank" rel="noopener">
-              <img alt="GitHub Profile" src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white">
-            </a>
-          {% endif %}
-
-          {% if site.linkedin and site.linkedin.url %}
-            <a href="{{ site.linkedin.url }}" target="_blank" rel="noopener">
-              <img alt="LinkedIn Profile" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white">
-            </a>
-          {% endif %}
-
-          {% if site.orcid and site.orcid.url %}
-            <a href="{{ site.orcid.url }}" target="_blank" rel="noopener">
-              <img alt="ORCID" src="https://img.shields.io/badge/ORCID-A6CE39?style=flat&logo=orcid&logoColor=white">
-            </a>
-          {% endif %}
-
-          {% if site.scholar and site.scholar.url %}
-            <a href="{{ site.scholar.url }}" target="_blank" rel="noopener">
-              <img alt="Google Scholar" src="https://img.shields.io/badge/Google%20Scholar-4285F4?style=flat&logo=google-scholar&logoColor=white">
-            </a>
-          {% endif %}
-
-          {% if site.show_downloads and site.github.zip_url %}
-            <a href="{{ site.github.zip_url }}" target="_blank" rel="noopener">
-              <img alt="Resume (PDF)" src="https://img.shields.io/badge/CV-%20PDF-EA4335?style=flat&logo=adobeacrobatreader&logoColor=white">
-            </a>
-          {% endif %}
-
-    {% if site.cats and site.cats.url %}
-      <a class="push-right" href="{{ site.cats.url }}" target="_blank" rel="noopener">
-        <img alt="Cats (off-duty)"
-             src="https://img.shields.io/badge/My%20Cat-Fermi%20%F0%9F%90%BE-6A5ACD?style=flat&labelColor=3b2a5e">
-      </a>
-    {% else %}
-      <!-- Hardcode if you don't want a config key -->
-      <a class="push-right" href="/cats.html" target="_blank" rel="noopener">
-        <img alt="Cats (off-duty)"
-             src="https://img.shields.io/badge/My%20Cat-Fermi%20%F0%9F%90%BE-6A5ACD?style=flat&labelColor=3b2a5e">
-      </a>
-    {% endif %}
-
-        </div>
-
-        <!-- Optional dropdown
-        <div class="dropdown" style="margin-top:10px;">
-          <button class="btn">More</button>
-          <div class="dropdown-content">
-            <a href="{{ site.github.pink_url }}" target="_blank">Two-Page Resume</a>
-          </div>
-        </div>
-        -->
-      </section>
     </div>
+
+    <p class="elsewhere">
+      {% if site.scholar and site.scholar.url %}<a href="{{ site.scholar.url }}">Google Scholar</a>{% endif %}
+      {% if site.orcid and site.orcid.url %}<a href="{{ site.orcid.url }}">ORCID</a>{% endif %}
+      {% if site.github.url %}<a href="{{ site.github.url }}">GitHub</a>{% endif %}
+      {% if site.linkedin and site.linkedin.url %}<a href="{{ site.linkedin.url }}">LinkedIn</a>{% endif %}
+    </p>
+
+    <nav class="tabs">
+      <a id="tab-about" href="#about">About</a>
+      <a id="tab-papers" href="#papers">Papers</a>
+      <a id="tab-talks" href="#talks">Talks</a>
+      <a id="tab-writing" href="#writing">Writing</a>
+      <a id="tab-mentorship" href="#mentorship">Mentorship</a>
+      <a id="tab-contact" href="#contact">Contact</a>
+    </nav>
   </header>
 
-  <div class="wrapingimage">
-    <img src="8B2DCC39-F334-4769-9A73-C81CA526CB4C.jpg" width="200" alt="Additi Pandey portrait">
-  </div>
+  <!-- ===== tab: About (text comes from README.md) ===== -->
+  <section id="about">
+    {{ content }}
+  </section>
 
-  <div class="container">
-    <section id="main_content">
-      {{ content }}
-    </section>
-  </div>
+  <!-- ===== tab: Papers ===== -->
+  <section id="papers">
+    <h2 id="publications">Publications</h2>
 
-  <!-- Publications auto-fill block -->
-  <div class="container" style="margin-top:18px;">
-    <!-- PUBLICATIONS:START -->
-    <!-- (leave this empty; the Action fills this) -->
-    <!-- PUBLICATIONS:END -->
-  </div>
+    <ol class="pubs">
 
-  <table class="tg">
-    <thead>
-      <tr>
-        <th class="tg-0lax"><b>Mathematics</b></th>
-        <th class="tg-0lax"><b>Computer Science</b></th>
-        <th class="tg-0lax"><b>Other Works</b></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="tg-0lax"><a href="https://cyclot0micextension.wordpress.com/2020/09/06/instant-insanity-puzzle/">Trapped in an Insanity Puzzle</a></td>
-        <td class="tg-0lax"><a href="https://cyclot0micextension.wordpress.com/2023/01/08/basics-of-object-oriented-programming/">A Walkthrough of OOP</a></td>
-        <td class="tg-0lax"><a href="https://cyclot0micextension.wordpress.com/2020/06/13/modern-portfolio-theory/">Modern Portfolio Theory</a></td>
-      </tr>
-      <tr>
-        <td class="tg-0lax">Painless Introduction to Lambda Calculus</td>
-        <td class="tg-0lax"><a href="https://cyclot0micextension.wordpress.com/2023/02/27/data-structures-in-python/">Data Structures</a></td>
-        <td class="tg-0lax"><a href="https://ficjmc.wordpress.com/2020/09/04/neuroeconomics-by-additi-pandey/">Introducing Neuroeconomics</a></td>
-      </tr>
-      <tr>
-        <td class="tg-0lax">Statistics for Data Science
-          <a href="https://cyclot0micextension.wordpress.com/2023/02/03/statistics-for-data-science-part-1/">1</a>,
-          <a href="https://cyclot0micextension.wordpress.com/2023/02/03/statistics-for-data-science-part-2/">2</a>,
-          <a href="https://cyclot0micextension.wordpress.com/2023/02/04/statistics-for-data-science-part-3/">3</a>
-        </td>
-        <td class="tg-0lax"><a href="https://cyclot0micextension.wordpress.com/2023/02/05/algorithm-analysis/">Algorithm Analysis</a></td>
-        <td class="tg-0lax"><a href="https://cyclot0micextension.wordpress.com/2023/03/10/psychology-and-decision-making/">Psychology and Decision Making</a></td>
-      </tr>
-    </tbody>
-  </table>
+      <li>
+        <strong>Pandey, Additi</strong>, Liang Wei, Hessam Babaee, and George Em Karniadakis. 
+        "Kinetic-Mamba: Mamba-Assisted Predictions of Stiff Chemical Kinetics."
+        <em>Journal of Machine Learning for Modeling and Computing</em> 7, no. 4 (2026).
+        <a href="https://doi.org/10.1615/JMachLearnModelComput.2026064419" target="_blank" rel="noopener">Published version</a>
+      </li>
 
-  <div class="container">
-  <h3>Mentorship</h3>
-  <p>
-    Outside my own research, I like to mentor students, especially those interested in numerical analysis, operator learning, and physics-informed neural networks.
-  </p>
+      <li>
+        Nath, Kamaljyoti, <strong>Additi Pandey</strong>, Bryan T. Susi, Hessam Babaee, and George Em Karniadakis.
+        “AMORE: Adaptive Multi-Output Operator Network for Stiff Chemical Kinetics.”
+        <em>Journal of Computational Physics</em> (2026): 115030.
+        <a href="https://doi.org/10.1016/j.jcp.2026.115030" target="_blank" rel="noopener">Published version</a>
+      </li>
 
-  <ul>
-<li>
-  <strong>Summer Mentor</strong>, CRUNCH Group (Summer 2025) — mentored a high-school student on modeling Black–Scholes equations using PINNs.
-  <span class="badge-row" style="display:inline-flex; gap:5px; margin-left:5px;">
-    <a href="https://sites.google.com/view/blackscholes-bobbywholey/home" target="_blank" rel="noopener">
-<img alt="Project Details"
-     src="https://img.shields.io/badge/Link%20-2ea44f?style=flat&logo=google-chrome&logoColor=white"
-       style="height:12px; width:auto; vertical-align:-2px;">
-    </a>
-  </span>
-</li>
-  </ul>
+      <li>
+        Shukla, Khemraj, Zongren Zou, Chi Hin Chan, <strong>Additi Pandey</strong>, Zhicheng Wang, and George Em Karniadakis.
+        “NeuroSEM: A hybrid framework for simulating multiphysics problems by coupling PINNs and spectral elements.”
+        <em>Computer Methods in Applied Mechanics and Engineering</em> 433 (2025): 117498.
+        <a href="https://doi.org/10.1016/j.cma.2024.117498" target="_blank" rel="noopener">Published version</a>
+      </li>
 
-  <h3>Expository</h3>
+    </ol>
+
+    <!-- Publications auto-fill block -->
+    <div>
+      <!-- PUBLICATIONS:START -->
+      <!-- (leave this empty; the Action fills this) -->
+      <!-- PUBLICATIONS:END -->
+    </div>
+  </section>
+
+  <!-- ===== tab: Talks ===== -->
+  <!-- To add a talk: copy one <li>...</li> block and change the words and the link. -->
+  <section id="talks">
+    <h2>Seminars and Talks</h2>
+    <ul class="talks">
+      <li>
+        Co-organizer and speaker, minisymposium “From Atoms to Heartbeats: Scientific Machine Learning for Biodynamical Systems,”
+        SIAM Conference on the Life Sciences (LS26), Cleveland, Ohio, 2026.
+      </li>
+      <li>
+        Graduate student talk on Kinetic-Mamba, AMS New England Graduate Student Conference, Brown University, April 11, 2026
+        (<a href="https://sites.google.com/brown.edu/amsgradconference/home">conference page</a>).
+      </li>
+      <li>
+        Paper review: “Deep learning analysis of blood flow sounds to detect arteriovenous fistula stenosis,” with Nikhil Kadivar.
+        Machine Learning + X Seminar, CRUNCH Group, Brown University, September 22, 2023
+        (<a href="https://sites.brown.edu/crunch-group/seminars/machine-learning-x-seminars/machine-learning-x-seminars-2023/">seminar page</a>).
+      </li>
+    </ul>
+
+    <h2>Workshops</h2>
+    <ul class="talks">
+      <li>
+        Introduction to Python: “Save Humans from the AI Farm!”, with Malindi Whyte.
+        Division of Applied Mathematics, Brown University
+        (<a href="https://github.com/cyclotomicextension/APMA-Python-Workshop">materials</a>).
+      </li>
+      <li>
+        Introduction to MATLAB: “Operation Ocean State: Zombie Outbreak Simulator”, with Chloe Griffin.
+        Division of Applied Mathematics, Brown University
+        (<a href="https://github.com/cyclotomicextension/APMA-MATLAB-Workshop">materials</a>).
+      </li>
+    </ul>
+  </section>
+
+  <!-- ===== tab: Writing ===== -->
+  <section id="writing">
+    <h2>Writing</h2>
+
+    <h4>Mathematics</h4>
+    <ul>
+      <li><a href="https://cyclot0micextension.wordpress.com/2020/09/06/instant-insanity-puzzle/">Trapped in an Insanity Puzzle</a></li>
+      <li>Painless Introduction to Lambda Calculus</li>
+      <li>Statistics for Data Science
+        <a href="https://cyclot0micextension.wordpress.com/2023/02/03/statistics-for-data-science-part-1/">1</a>,
+        <a href="https://cyclot0micextension.wordpress.com/2023/02/03/statistics-for-data-science-part-2/">2</a>,
+        <a href="https://cyclot0micextension.wordpress.com/2023/02/04/statistics-for-data-science-part-3/">3</a>
+      </li>
+    </ul>
+
+    <h4>Computer Science</h4>
+    <ul>
+      <li><a href="https://cyclot0micextension.wordpress.com/2023/01/08/basics-of-object-oriented-programming/">A Walkthrough of OOP</a></li>
+      <li><a href="https://cyclot0micextension.wordpress.com/2023/02/27/data-structures-in-python/">Data Structures</a></li>
+      <li><a href="https://cyclot0micextension.wordpress.com/2023/02/05/algorithm-analysis/">Algorithm Analysis</a></li>
+    </ul>
+
+    <h4>Other Works</h4>
+    <ul>
+      <li><a href="https://cyclot0micextension.wordpress.com/2020/06/13/modern-portfolio-theory/">Modern Portfolio Theory</a></li>
+      <li><a href="https://ficjmc.wordpress.com/2020/09/04/neuroeconomics-by-additi-pandey/">Introducing Neuroeconomics</a></li>
+      <li><a href="https://cyclot0micextension.wordpress.com/2023/03/10/psychology-and-decision-making/">Psychology and Decision Making</a></li>
+    </ul>
+
+    <h4>Expository</h4>
     <p>I had started a ‘Wrapping My Head Around’ series for concepts that I initially thought were hard but seem trivial now:</p>
     <ul>
-      <li><a href="https://wordpress.com/post/cyclot0micextension.wordpress.com/514">NumPy Broadcasting</a></li>
+      <li>NumPy Broadcasting</li>
       <li><a href="https://cyclot0micextension.wordpress.com/2023/02/08/wrapping-my-head-around-matplotlib/">matplotlib</a></li>
       <li><a href="https://cyclot0micextension.wordpress.com/2023/02/18/categorical-data-encoders/">Categorical Data Encoders</a></li>
       <li><a href="https://cyclot0micextension.wordpress.com/2023/02/24/wrapping-my-head-around-anomalous-behaviour-of-logical-operators-in-python/">Logical vs Bitwise Operators</a></li>
       <li><a href="https://cyclot0micextension.wordpress.com/2023/03/01/imperative-programming-paradigm/">Imperative Programming Paradigm</a></li>
     </ul>
+  </section>
 
-    <p><strong>I would love to hear from you!</strong></p>
+  <!-- ===== tab: Mentorship ===== -->
+  <section id="mentorship">
+    <h2>Mentorship</h2>
+    <p>
+      Outside my own research, I like to mentor students, especially those interested in numerical analysis, operator learning, and physics-informed neural networks.
+    </p>
+    <ul>
+      <li>
+        <strong>Summer Mentor</strong>, CRUNCH Group (Summer 2025) — mentored a high-school student on modeling Black–Scholes equations using PINNs
+        (<a href="https://sites.google.com/view/blackscholes-bobbywholey/home">project page</a>).
+      </li>
+      <li>
+        <strong>Mentor</strong>, Directed Reading Program, Division of Applied Mathematics, Brown University (Spring 2026) — “Introduction to Turbulence: Stability and Modeling”
+        (<a href="https://sites.google.com/brown.edu/apma-drp/past-projects">project page</a>).
+      </li>
+    </ul>
+  </section>
+
+  <!-- ===== tab: Contact ===== -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>I would love to hear from you!</p>
     <form action="https://formspree.io/f/xaygwqrk" method="POST">
       <label>Your email:<input type="email" name="email" required></label>
       <label>Your message:<textarea name="message" rows="4" required></textarea></label>
       <button type="submit">Send</button>
     </form>
-  </div>
-<!-- 
-  <footer>
-    <div class="container">
-      <p>
-        <strong>{{ site.title | default: site.github.repository_name }}</strong>
-        {% if site.github.is_project_page %}
-          is maintained with ❤️ and ☕️ by
-          <a href="{{ site.github.owner_url }}" target="_blank">{{ site.github.owner_name }}</a>.
-        {% endif %}
-      </p>
+  </section>
+
+  <!-- ===== tab: Cats ===== -->
+  <!-- Photos: put them in a folder named "cats" as cats/fermi.jpg and cats/oppenheimer.jpg.
+       Until a photo is there, the little drawing shows instead.
+       To add another photo: copy one <div class="cat-photo">...</div> block. -->
+  <section id="cats">
+    <h2>The cats</h2>
+    <div class="cat-row">
+      <div class="cat-photo tilt-left">
+        <div class="cat-frame">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M22 44 L26 14 L44 30 M56 30 L74 14 L78 44"/>
+            <circle cx="50" cy="54" r="30"/>
+            <path d="M38 50 L38 55 M62 50 L62 55 M47 62 L53 62 L50 66 Z M50 66 Q46 72 41 69 M50 66 Q54 72 59 69"/>
+            <path d="M30 60 L10 56 M30 65 L11 68 M70 60 L90 56 M70 65 L89 68"/>
+          </svg>
+          <img src="{{ '/cats/fermi.jpg' | relative_url }}" alt="Fermi the cat" onerror="this.style.display='none'">
+        </div>
+        <p>Fermi</p>
+      </div>
+      <div class="cat-photo tilt-right">
+        <div class="cat-frame">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M22 44 L26 14 L44 30 M56 30 L74 14 L78 44"/>
+            <circle cx="50" cy="54" r="30"/>
+            <path d="M38 50 L38 55 M62 50 L62 55 M47 62 L53 62 L50 66 Z M50 66 Q46 72 41 69 M50 66 Q54 72 59 69"/>
+            <path d="M30 60 L10 56 M30 65 L11 68 M70 60 L90 56 M70 65 L89 68"/>
+          </svg>
+          <img src="{{ '/cats/oppenheimer.jpg' | relative_url }}" alt="Oppenheimer the cat" onerror="this.style.display='none'">
+        </div>
+        <p>Oppenheimer</p>
+      </div>
     </div>
-  </footer> -->
+  </section>
+
+  <footer>
+    <!-- a little trail of paw prints -->
+    <p class="paws">
+      <svg viewBox="0 0 24 22" style="transform: rotate(-20deg) translateY(4px);"><ellipse cx="12" cy="15" rx="6" ry="5"/><circle cx="4.5" cy="9" r="2.4"/><circle cx="9.5" cy="4" r="2.4"/><circle cx="15" cy="4" r="2.4"/><circle cx="19.5" cy="9" r="2.4"/></svg>
+      <svg viewBox="0 0 24 22" style="transform: rotate(15deg) translateY(-4px);"><ellipse cx="12" cy="15" rx="6" ry="5"/><circle cx="4.5" cy="9" r="2.4"/><circle cx="9.5" cy="4" r="2.4"/><circle cx="15" cy="4" r="2.4"/><circle cx="19.5" cy="9" r="2.4"/></svg>
+      <svg viewBox="0 0 24 22" style="transform: rotate(-20deg) translateY(4px);"><ellipse cx="12" cy="15" rx="6" ry="5"/><circle cx="4.5" cy="9" r="2.4"/><circle cx="9.5" cy="4" r="2.4"/><circle cx="15" cy="4" r="2.4"/><circle cx="19.5" cy="9" r="2.4"/></svg>
+      <svg viewBox="0 0 24 22" style="transform: rotate(15deg) translateY(-4px);"><ellipse cx="12" cy="15" rx="6" ry="5"/><circle cx="4.5" cy="9" r="2.4"/><circle cx="9.5" cy="4" r="2.4"/><circle cx="15" cy="4" r="2.4"/><circle cx="19.5" cy="9" r="2.4"/></svg>
+    </p>
+  </footer>
+
+</div>
+
+<script>
+  // The tabs. Each name matches a <section id="..."> and a link id="tab-...".
+  // If JavaScript is off, every section simply shows on one page.
+  var names = ["about", "papers", "talks", "writing", "mentorship", "contact", "cats"];
+
+  function showTab(name) {
+    for (var i = 0; i < names.length; i++) {
+      var section = document.getElementById(names[i]);
+      var link = document.getElementById("tab-" + names[i]);
+      if (names[i] == name) {
+        section.style.display = "block";
+        link.className = "on";
+      } else {
+        section.style.display = "none";
+        link.className = "";
+      }
+    }
+  }
+
+  function showTabFromAddress() {
+    var name = window.location.hash.replace("#", "");
+    if (names.indexOf(name) == -1) {
+      name = "about";
+    }
+    showTab(name);
+    window.scrollTo(0, 0);
+  }
+
+  window.onhashchange = showTabFromAddress;
+  showTabFromAddress();
+</script>
 </body>
 </html>
