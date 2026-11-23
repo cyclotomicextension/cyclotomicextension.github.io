@@ -5,6 +5,7 @@
 <ul class="skills">
   <li><strong>Theorem proving:</strong> Lean</li>
   <li><strong>Machine learning:</strong> Python, PyTorch, JAX</li>
+  <li><strong>Molecular dynamics:</strong> GROMACS, LAMMPS</li>
   <li><strong>Scientific computing:</strong> MATLAB, Cantera</li>
 </ul>
 
