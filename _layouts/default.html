@@ -168,6 +168,59 @@
       color: var(--accent);
     }
 
+    ul.talks li {
+      margin-bottom: 14px;
+    }
+
+    /* ---------- cats ---------- */
+    .cat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 36px;
+      justify-content: center;
+      margin-top: 28px;
+    }
+    .cat-photo {
+      width: 230px;
+      padding: 10px 10px 4px;
+      background: #fffdf8;
+      border: 1px solid var(--rule);
+    }
+    .tilt-left { transform: rotate(-3deg); }
+    .tilt-right { transform: rotate(2deg); }
+    .cat-frame {
+      position: relative;
+      width: 230px;
+      height: 230px;
+      background: var(--paper);
+    }
+    .cat-frame svg {
+      position: absolute;
+      left: 45px;
+      top: 45px;
+      width: 140px;
+      height: 140px;
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .cat-frame img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .cat-photo p {
+      font-family: "Caveat", "Segoe Print", cursive;
+      font-size: 26px;
+      text-align: center;
+      margin: 6px 0 4px;
+    }
+
     /* ---------- contact form ---------- */
     label {
       display: block;
@@ -220,8 +273,15 @@
     }
     footer .cat {
       font-family: "Caveat", "Segoe Print", cursive;
-      font-size: 20px;
+      font-size: 22px;
       margin: 0;
+    }
+    footer .cat a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    footer .cat a:hover, footer .cat a.on {
+      color: var(--accent);
     }
 
     /* ---------- phones ---------- */
@@ -259,7 +319,6 @@
     </div>
 
     <p class="elsewhere">
-      <a href="{{ '/AdditiPandeyCV.pdf' | relative_url }}">CV</a>
       {% if site.scholar and site.scholar.url %}<a href="{{ site.scholar.url }}">Google Scholar</a>{% endif %}
       {% if site.orcid and site.orcid.url %}<a href="{{ site.orcid.url }}">ORCID</a>{% endif %}
       {% if site.github.url %}<a href="{{ site.github.url }}">GitHub</a>{% endif %}
@@ -269,6 +328,7 @@
     <nav class="tabs">
       <a id="tab-about" href="#about">About</a>
       <a id="tab-papers" href="#papers">Papers</a>
+      <a id="tab-talks" href="#talks">Talks</a>
       <a id="tab-writing" href="#writing">Writing</a>
       <a id="tab-mentorship" href="#mentorship">Mentorship</a>
       <a id="tab-contact" href="#contact">Contact</a>
@@ -315,6 +375,23 @@
       <!-- (leave this empty; the Action fills this) -->
       <!-- PUBLICATIONS:END -->
     </div>
+  </section>
+
+  <!-- ===== tab: Talks ===== -->
+  <!-- To add a talk: copy one <li>...</li> block and change the words and the link. -->
+  <section id="talks">
+    <h2>Seminars and Talks</h2>
+    <ul class="talks">
+      <li>
+        Co-organizer and speaker, minisymposium “From Atoms to Heartbeats: Scientific Machine Learning for Biodynamical Systems,”
+        SIAM Conference on the Life Sciences (LS26), Cleveland, Ohio, 2026.
+      </li>
+      <li>
+        Paper review: “Deep learning analysis of blood flow sounds to detect arteriovenous fistula stenosis,” with Nikhil Kadivar.
+        Machine Learning + X Seminar, CRUNCH Group, Brown University, September 22, 2023
+        (<a href="https://sites.brown.edu/crunch-group/seminars/machine-learning-x-seminars/machine-learning-x-seminars-2023/">seminar page</a>).
+      </li>
+    </ul>
   </section>
 
   <!-- ===== tab: Writing ===== -->
@@ -369,7 +446,8 @@
         (<a href="https://sites.google.com/view/blackscholes-bobbywholey/home">project page</a>).
       </li>
       <li>
-        <strong>Mentor</strong>, Directed Reading Program, Division of Applied Mathematics, Brown University — guided an undergraduate reading project on linear instability theory and turbulence.
+        <strong>Mentor</strong>, Directed Reading Program, Division of Applied Mathematics, Brown University (Spring 2026) — “Introduction to Turbulence: Stability and Modeling”
+        (<a href="https://sites.google.com/brown.edu/apma-drp/past-projects">project page</a>).
       </li>
     </ul>
   </section>
@@ -385,9 +463,43 @@
     </form>
   </section>
 
+  <!-- ===== tab: Cats (opened from the footer, not from the tab row) ===== -->
+  <!-- Photos: put them in a folder named "cats" as cats/fermi.jpg and cats/oppenheimer.jpg.
+       Until a photo is there, the little drawing shows instead.
+       To add another photo: copy one <div class="cat-photo">...</div> block. -->
+  <section id="cats">
+    <h2>The cats</h2>
+    <div class="cat-row">
+      <div class="cat-photo tilt-left">
+        <div class="cat-frame">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M22 44 L26 14 L44 30 M56 30 L74 14 L78 44"/>
+            <circle cx="50" cy="54" r="30"/>
+            <path d="M38 50 L38 55 M62 50 L62 55 M47 62 L53 62 L50 66 Z M50 66 Q46 72 41 69 M50 66 Q54 72 59 69"/>
+            <path d="M30 60 L10 56 M30 65 L11 68 M70 60 L90 56 M70 65 L89 68"/>
+          </svg>
+          <img src="{{ '/cats/fermi.jpg' | relative_url }}" alt="Fermi the cat" onerror="this.style.display='none'">
+        </div>
+        <p>Fermi</p>
+      </div>
+      <div class="cat-photo tilt-right">
+        <div class="cat-frame">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M22 44 L26 14 L44 30 M56 30 L74 14 L78 44"/>
+            <circle cx="50" cy="54" r="30"/>
+            <path d="M38 50 L38 55 M62 50 L62 55 M47 62 L53 62 L50 66 Z M50 66 Q46 72 41 69 M50 66 Q54 72 59 69"/>
+            <path d="M30 60 L10 56 M30 65 L11 68 M70 60 L90 56 M70 65 L89 68"/>
+          </svg>
+          <img src="{{ '/cats/oppenheimer.jpg' | relative_url }}" alt="Oppenheimer the cat" onerror="this.style.display='none'">
+        </div>
+        <p>Oppenheimer</p>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <p class="leaf">❦</p>
-    <p class="cat">my cat, Fermi (off duty)</p>
+    <p class="cat"><a id="tab-cats" href="#cats">meet Fermi and Oppenheimer</a></p>
   </footer>
 
 </div>
@@ -395,7 +507,7 @@
 <script>
   // The tabs. Each name matches a <section id="..."> and a link id="tab-...".
   // If JavaScript is off, every section simply shows on one page.
-  var names = ["about", "papers", "writing", "mentorship", "contact"];
+  var names = ["about", "papers", "talks", "writing", "mentorship", "contact", "cats"];
 
   function showTab(name) {
     for (var i = 0; i < names.length; i++) {
